@@ -97,6 +97,11 @@ Want to be sure there are no external dependencies? Run:
 bash init.sh deps
 ```
 
+## 📚 Docs
+
+Architecture, build internals and the game programming patterns in use are
+documented in [`docs/`](docs/README.md).
+
 ## 🙏 Credits
 
 - The roots of this project are based on the great work of
