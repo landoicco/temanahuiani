@@ -1,51 +1,105 @@
-# Java Tower Defender
+# 🏰 Temanahuiani
 
-## How to play?
-This project includes a shell utility for building all the code.
-To use it, just follow along:
+![Java](https://img.shields.io/badge/Java-vanilla-ED8B00?logo=openjdk&logoColor=white)
+![Nix](https://img.shields.io/badge/Nix-flake-5277C3?logo=nixos&logoColor=white)
+![Bash](https://img.shields.io/badge/build-bash-4EAA25?logo=gnubash&logoColor=white)
+![No frameworks](https://img.shields.io/badge/frameworks-none-lightgrey)
+![No build tools](https://img.shields.io/badge/build%20tools-none-lightgrey)
 
-First, make the contents of `bash/` executable. Take a look at those files, are full of long commands that works just like a hand-made *Maven*.
+A tower defense engine and demo game written in plain Java: no frameworks,
+no build tools, no libraries.
+
+## 🪶 About the name
+
+**Temanahuiani** is a Nahuatl word meaning *defender* or *protector*: the one
+who defends others (*te-* "people", *manahuia* "to defend", *-ni* "one who
+does"). A fitting name for a tower defense game.
+
+<!-- TODO: Add link to the dictionary entry -->
+
+## 🎯 Goals
+
+1. A fun learning project to understand how Java works at its roots, in the
+   most "pure" and "vanilla" way.
+2. A reusable engine to build other games of this genre.
+
+## 🧰 Requirements
+
+The only requirement is a JDK. The repo ships a [Nix](https://nixos.org/) flake
+with a dev shell that provides it:
+
+```shell
+nix develop
 ```
-chmod +x bash/*
-```
-move to `bash/`
-```
+
+Without Nix, any recent JDK with `java`, `javac`, `jar` and `jdeps` on the
+`PATH` will do.
+
+## 🎮 How to play?
+
+All commands run from the `bash/` directory:
+
+```shell
 cd bash/
+bash init.sh bplay
 ```
 
-and then, just run:
+This cleans previous builds, compiles the *engine* modules (commons, tools and
+core) and the *demo* module, packs them into jars and starts the game.
+
+Run `bash init.sh` with no arguments for an interactive wizard.
+
+> 💡 Use `bash init.sh` instead of `./init.sh` or `sh init.sh`: the scripts rely
+> on bash features and `/bin/bash` doesn't exist on every system (e.g. NixOS).
+
+## 🛠️ Commands
+
+| Command                       | Description                                   |
+| ----------------------------- | --------------------------------------------- |
+| `bash init.sh bplay`          | Clean, build everything and play              |
+| `bash init.sh play`           | Play using the last build                     |
+| `bash init.sh clean`          | Remove all previous builds                    |
+| `bash init.sh deps`           | Fresh build, list modules and their deps      |
+| `bash init.sh help`           | List the available commands                   |
+| `bash init.sh build <module>` | Build `all`, `engine`, `demo`, `commons`, `tools` or `core` |
+| `bash init.sh log <command>`  | Run `build`, `bplay` or `play` writing output to `logs/`; `clear` removes them |
+
+## 🧩 Modules
+
+The project is split into [Java modules](https://openjdk.org/projects/jigsaw/),
+compiled in dependency order:
+
 ```
-./init.sh
+licaza.tdefender.engine.commons    actors, waves, tiles, projectiles, constants
+        ▲
+licaza.tdefender.engine.tools      GUI widgets, resource loading, pathfinding
+        ▲
+licaza.tdefender.engine.core       base game loop and managers
+        ▲
+licaza.tdefender.demo              the demo game: scenes, enemies, UI, assets
 ```
-and the wizard will get all ready for you.
 
-If you want it right now, go for it:
+Each module only requires `java.desktop` from the JDK, plus the engine
+modules above it.
 
-``` shell
-./init.sh bplay
-```
-This will build the *engine* modules (commons, tools & core) and the *demo* module, then run the game.
-
-## How was made?
-
-First of all, the roots of this project are based on the great work of [Kaarin Gaming](https://www.youtube.com/watch?v=kclnyiXmY7Q&list=PL4rzdwizLaxb0-TajNIp5DOoT_PAxhx0T)
-
-The intention of this project is to first be a fun learning project, this is the first purpose. The second one, is to be a useful tools to develop other games of this style.
-
-## What about `bash/`?
+## 🐚 What about `bash/`?
 
 Well, Maven/Gradle is for the weak... right?
 
-This project pretends to help understand how the "roots" of Java work, from the very basics and in the most "pure" and "vanilla" way.
+The scripts in `bash/` work like a hand-made *Maven*: they call `javac` and
+`jar` for each module and put the results in `src/mods`, which is then used as
+the module path to run the game. Take a look at them, they are full of long
+commands worth reading.
 
-That said, NO FRAMWORKS, NO BUILDING TOOLS, NO LIBRARIES
+Want to be sure there are no external dependencies? Run:
 
-since this is a very basic project, we don't need those.
-
-Want to be sure? Run:
-
-``` shell
-./init.sh deps
+```shell
+bash init.sh deps
 ```
-this will show you the modules that make the game, as well as their dependencies.
 
+## 🙏 Credits
+
+- The roots of this project are based on the great work of
+  [Kaarin Gaming](https://www.youtube.com/watch?v=kclnyiXmY7Q&list=PL4rzdwizLaxb0-TajNIp5DOoT_PAxhx0T).
+- Sprites, sounds and fonts belong to their authors, listed in
+  [`src/res/LICENSES.txt`](src/res/LICENSES.txt).
