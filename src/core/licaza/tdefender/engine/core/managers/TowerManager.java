@@ -80,7 +80,7 @@ public class TowerManager {
     public void upgradeTower(Tower displayedTower) {
         for (Tower t : towers) {
             if (t.getId() == displayedTower.getId())
-                // TODO: Add check for each kinf of tower
+                // TODO: Add check for each kind of tower
                 t.upgradeTower(1, 10.0f, 3.0f);
         }
 
