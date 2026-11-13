@@ -1,6 +1,6 @@
 # 0002. Nix flake for the dev environment
 
-**Status:** Accepted
+**Status:** Superseded by [0006](0006-nix-dev-shells-for-development-and-ci.md)
 
 ## Context
 

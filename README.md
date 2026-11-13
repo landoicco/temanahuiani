@@ -39,7 +39,11 @@ Without Nix, any recent JDK with `java`, `javac`, `jar` and `jdeps` on the
 
 ## 🎮 How to play?
 
-All commands run from the `bash/` directory:
+The easiest way: download the zip for your OS from the
+[Releases](https://github.com/landoicco/temanahuiani/releases) page, unzip it
+and run the `Temanahuiani` app. It bundles its own Java, nothing to install.
+
+To build it from source, run the commands from the `bash/` directory:
 
 ```shell
 cd bash/
