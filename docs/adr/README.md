@@ -7,10 +7,12 @@ that someone would otherwise question get a record.
 | ADR                                                          | Decision                                         | Status   |
 | ------------------------------------------------------------ | ------------------------------------------------ | -------- |
 | [0001](0001-vanilla-java-without-build-tools.md)             | Vanilla Java: no build tools, frameworks or libraries | Accepted |
-| [0002](0002-nix-flake-dev-environment.md)                    | Nix flake for the dev environment                | Accepted |
+| [0002](0002-nix-flake-dev-environment.md)                    | Nix flake for the dev environment                | Superseded by 0006 |
 | [0003](0003-code-formatting-with-google-java-format.md)      | google-java-format (AOSP style) for formatting   | Accepted |
 | [0004](0004-unit-tests-with-junit-on-the-classpath.md)       | JUnit tests on the classpath, outside `src/`     | Accepted |
 | [0005](0005-package-name-apart-from-game-title.md)           | `dev.licaza.temanahuiani` packages, apart from the game title | Accepted |
+| [0006](0006-nix-dev-shells-for-development-and-ci.md)        | Nix dev shells for development and CI            | Accepted |
+| [0007](0007-ci-and-releases-with-github-actions.md)          | CI and releases with GitHub Actions and `jpackage` app images | Accepted |
 
 ## Writing a new one
 

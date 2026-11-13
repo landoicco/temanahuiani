@@ -15,8 +15,7 @@ set_general_selection() {
         ;;
     "bplay")
         clean
-        build_and_pack
-        play
+        build_and_pack && play
         ;;
     "help")
         help
@@ -32,8 +31,7 @@ set_general_selection() {
         ;;
     "test")
         clean
-        build_and_pack
-        run_tests
+        build_and_pack && run_tests
         ;;
     *)
         echo_text_bred "ERROR: Unknown selection."

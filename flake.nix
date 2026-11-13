@@ -15,29 +15,42 @@
         url = "https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/${junitVersion}/junit-platform-console-standalone-${junitVersion}.jar";
         hash = "sha256-5iuWrEddvN6FmeqQXQiPZdkHePhuJZuFakn6XE6iVuw=";
       };
-    in
-    {
-      # nix develop
-      devShells.${system}.default = pkgs.mkShell {
-        packages = [ jdk pkgs.gh pkgs.google-java-format ];
 
+      # inputsFrom only shares packages, so both shells set these
+      env = {
         JAVA_HOME = jdk.home;
         JUNIT_JAR = junit;
+      };
 
-        shellHook = ''
-          dim=$'\e[2m'; reset=$'\e[0m'
+      # nix develop .#ci: what CI needs to build, lint and test
+      ci = pkgs.mkShell (env // {
+        packages = [ jdk pkgs.google-java-format ];
+      });
+    in
+    {
+      devShells.${system} = {
+        inherit ci;
 
-          echo ""
-          echo "  🏰 temanahuiani ''${dim}· dev shell''${reset}"
-          echo "  ''${dim}─────────────────────────────''${reset}"
-          echo "  ☕ JDK  ${jdk.version}"
-          echo "  🐙 gh   ${pkgs.gh.version}"
-          echo "  🧹 gjf  ${pkgs.google-java-format.version}"
-          echo "  🧪 JUnit ${junitVersion}"
-          echo ""
-          echo "  ''${dim}cd bash && ./init.sh bplay''${reset}"
-          echo ""
-        '';
+        # nix develop: everything in ci, plus tools for local development
+        default = pkgs.mkShell (env // {
+          inputsFrom = [ ci ];
+          packages = [ pkgs.gh ];
+
+          shellHook = ''
+            dim=$'\e[2m'; reset=$'\e[0m'
+
+            echo ""
+            echo "  🏰 temanahuiani ''${dim}· dev shell''${reset}"
+            echo "  ''${dim}─────────────────────────────''${reset}"
+            echo "  ☕ JDK  ${jdk.version}"
+            echo "  🐙 gh   ${pkgs.gh.version}"
+            echo "  🧹 gjf  ${pkgs.google-java-format.version}"
+            echo "  🧪 JUnit ${junitVersion}"
+            echo ""
+            echo "  ''${dim}cd bash && bash init.sh bplay''${reset}"
+            echo ""
+          '';
+        });
       };
     };
 }

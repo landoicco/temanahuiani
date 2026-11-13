@@ -59,6 +59,22 @@ To test a new package, just add its test class under the same package in
 google-java-format, and `bash init.sh lint` fails if any of them isn't
 formatted (see [ADR 0003](adr/0003-code-formatting-with-google-java-format.md)).
 
+## CI and releases
+
+`.github/workflows/ci.yml` runs `lint` and `test` in the Nix `ci` shell
+(`nix develop .#ci`) on every PR and push to `master`. To publish a release,
+push a version tag:
+
+```shell
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+CI then packages the game with `jpackage` on Windows, macOS and Linux, and
+creates a GitHub Release with one zip per OS. A manual run (*Actions → CI →
+Run workflow*) builds the same zips as artifacts, without a release. See
+[ADR 0007](adr/0007-ci-and-releases-with-github-actions.md).
+
 ## Generated files
 
 | Path               | Content                     |

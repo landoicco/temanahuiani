@@ -18,8 +18,7 @@ engine() {
 # Build all in one shot
 all() {
     create_mods_dir
-    engine
-    demo
+    engine && demo
 }
 
 # # Module specific commands

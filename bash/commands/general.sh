@@ -28,7 +28,10 @@ build_and_pack() {
     echo_text_byellow "=== Building Java ==="
 
     # Compile and jar all Java code
-    build_all_java_modules
+    if ! build_all_java_modules; then
+        echo_text_bred "Build failed!"
+        return 1
+    fi
 
     echo_text_green "Java modules compiled and packaged!"
 

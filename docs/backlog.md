@@ -21,13 +21,6 @@ Use an icon spritesheet (play, pause, mute, settings, home, arrows...) for
 settings, pause and mute buttons. Kenney's *Game Icons* pack is a good
 candidate.
 
-### Release builds with GitHub Actions
-
-Add a CI workflow that builds the game and publishes runnable packages for
-Windows, Linux and macOS, so players don't need a JDK or the `bash/` scripts.
-`jpackage` can create one native package per OS, running on a matrix of
-GitHub runners (`windows-latest`, `ubuntu-latest`, `macos-latest`).
-
 ### New tile system (PR #7, parked)
 
 PR #7 (`subfeature/redo_tilemanager_and_loading_logic`, draft) replaces the
@@ -61,6 +54,15 @@ right.
   scene became the credits scene (see TODO in `MyMouseListener`).
 - **Dead code**: `LoadSave.CreateFile()` creates a `test.txt` and seems unused.
 - **`install` command**: listed in the `init.sh` menu but not implemented.
+  It could run the same `jpackage` call as CI.
+- **Levels are saved in the working directory**: `LoadSave` reads and writes
+  `default_level.txt` relative to where the game is launched. A packaged app
+  may start somewhere read-only (e.g. `/` for a macOS `.app` opened from
+  Finder), so it should use a folder in the user's home instead.
+- **`PathFinding` loops forever on dead ends**: if the road has a dead end or
+  doesn't reach the end point, `GetRoadDirectionArray` never returns.
+- **`create_mods_dir` doesn't exist**: `bash/commands/build.sh` calls it;
+  `set_build_selection` creates `src/mods` before, so it only prints an error.
 - **Assets licenses**: every asset (sprites, sounds, fonts) must be sourced
   again from scratch, checking its license and crediting it in
   `src/res/LICENSES.txt`. The current file is out of date: it lists
