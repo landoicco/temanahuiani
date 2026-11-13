@@ -1,4 +1,4 @@
-package licaza.tdefender.engine.commons.objects;
+package dev.licaza.temanahuiani.engine.commons.objects;
 
 import java.awt.image.BufferedImage;
 

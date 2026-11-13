@@ -1,4 +1,4 @@
-package licaza.tdefender.engine.commons.misc;
+package dev.licaza.temanahuiani.engine.commons.misc;
 
 /**
  * Bundle of all constants needed for other engine modules

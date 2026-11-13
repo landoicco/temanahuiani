@@ -1,9 +1,9 @@
-package licaza.tdefender.engine.commons.actors;
+package dev.licaza.temanahuiani.engine.commons.actors;
 
 import java.awt.Rectangle;
 import java.util.function.IntConsumer;
 
-import static licaza.tdefender.engine.commons.misc.Constants.Directions.*;
+import static dev.licaza.temanahuiani.engine.commons.misc.Constants.Directions.*;
 
 public class Enemy {
 

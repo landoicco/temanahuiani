@@ -1,9 +1,9 @@
-module licaza.tdefender.engine.commons {
+module dev.licaza.temanahuiani.engine.commons {
     requires java.desktop;
 
-    exports licaza.tdefender.engine.commons.objects;
-    exports licaza.tdefender.engine.commons.api;
-    exports licaza.tdefender.engine.commons.misc;
-    exports licaza.tdefender.engine.commons.events;
-    exports licaza.tdefender.engine.commons.actors;
+    exports dev.licaza.temanahuiani.engine.commons.objects;
+    exports dev.licaza.temanahuiani.engine.commons.api;
+    exports dev.licaza.temanahuiani.engine.commons.misc;
+    exports dev.licaza.temanahuiani.engine.commons.events;
+    exports dev.licaza.temanahuiani.engine.commons.actors;
 }
