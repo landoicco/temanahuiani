@@ -12,7 +12,7 @@
     {
       # nix develop
       devShells.${system}.default = pkgs.mkShell {
-        packages = [ jdk pkgs.gh ];
+        packages = [ jdk pkgs.gh pkgs.google-java-format ];
 
         JAVA_HOME = jdk.home;
 
@@ -24,6 +24,7 @@
           echo "  ''${dim}─────────────────────────────''${reset}"
           echo "  ☕ JDK  ${jdk.version}"
           echo "  🐙 gh   ${pkgs.gh.version}"
+          echo "  🧹 gjf  ${pkgs.google-java-format.version}"
           echo ""
           echo "  ''${dim}cd bash && ./init.sh bplay''${reset}"
           echo ""

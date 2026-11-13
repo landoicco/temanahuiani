@@ -41,6 +41,14 @@ show_long_menu() {
     echo -ne "\tBuild source code and play game - "
     echo_text_yellow "bplay"
 
+    # format
+    echo -ne "\tFormat Java code with google-java-format - "
+    echo_text_yellow "format"
+
+    # lint
+    echo -ne "\tCheck Java code is formatted - "
+    echo_text_yellow "lint"
+
     # install
     echo -ne "\tCreate executable of this game - "
     echo_text_yellow "install"
