@@ -2,6 +2,8 @@ package dev.licaza.temanahuiani.engine.core.main;
 
 import dev.licaza.temanahuiani.engine.tools.helpers.LoadSave;
 
+import java.util.concurrent.locks.LockSupport;
+
 import javax.swing.JFrame;
 
 public class Game extends JFrame {
@@ -9,12 +11,6 @@ public class Game extends JFrame {
     private final double FPS_SET = 120.0;
     private final double UPS_SET = 60.0;
     private Runnable updateGameCallback;
-    private final String STATS_MSG =
-            """
-            ==============
-                FPS: %d
-                UPS: %d
-            """;
 
     protected Game() {
         this("Tower Defender - Java");
@@ -50,11 +46,8 @@ public class Game extends JFrame {
             () -> {
                 double timePerFrame = 1_000_000_000.0 / FPS_SET;
                 double timePerUpdate = 1_000_000_000.0 / UPS_SET;
-                long lastTimeCheck = System.currentTimeMillis();
                 long lastFrame = System.nanoTime();
                 long lastTimeUPS = System.nanoTime();
-                int frames = 0;
-                int updates = 0;
 
                 long now;
 
@@ -65,20 +58,21 @@ public class Game extends JFrame {
                     if (now - lastFrame >= timePerFrame) {
                         lastFrame = now;
                         repaint();
-                        frames++;
                     }
 
                     // Update
                     if (now - lastTimeUPS >= timePerUpdate) {
                         lastTimeUPS = now;
                         updateGameCallback.run();
-                        updates++;
                     }
 
-                    if (System.currentTimeMillis() - lastTimeCheck >= 1000) {
-                        frames = 0;
-                        updates = 0;
-                        lastTimeCheck = System.currentTimeMillis();
+                    // Sleep until the next render or update is due, instead of
+                    // spinning and keeping a CPU core busy
+                    double nextEvent =
+                            Math.min(lastFrame + timePerFrame, lastTimeUPS + timePerUpdate);
+                    long sleepNanos = (long) nextEvent - System.nanoTime();
+                    if (sleepNanos > 0) {
+                        LockSupport.parkNanos(sleepNanos);
                     }
                 }
             };

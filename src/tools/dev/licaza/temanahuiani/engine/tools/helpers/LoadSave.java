@@ -42,15 +42,6 @@ public class LoadSave {
         return img;
     }
 
-    public static void CreateFile() {
-        File file = new File("test.txt");
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void SaveLevel(String name, int[][] idArray, PathPoint start, PathPoint end) {
         File levelFile = new File(name + ".txt");
 
