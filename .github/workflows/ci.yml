@@ -23,7 +23,7 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       - uses: cachix/install-nix-action@v31
 
@@ -36,7 +36,7 @@ jobs:
         working-directory: bash
         run: nix develop ..#ci --command bash init.sh test
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: mods
           path: src/mods/*.jar
@@ -62,12 +62,12 @@ jobs:
         shell: bash
     steps:
       # Same major version as the flake's JDK
-      - uses: actions/setup-java@v5
+      - uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: "21"
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: mods
           path: mods
@@ -81,13 +81,15 @@ jobs:
             --module "$MAIN_MODULE" \
             --dest dist
 
-      # Tag name for releases (v0.1.0), commit for manual runs
+      # e.g. Temanahuiani-v0.1.0-windows-x64.zip; manual runs use the commit
+      # instead of the tag. The arch tells Intel and Apple Silicon Macs apart.
       - name: Zip app image
         id: zip
         run: |
           version="${GITHUB_REF_NAME}"
           [[ "$GITHUB_REF" == refs/tags/v* ]] || version="${GITHUB_SHA::7}"
-          file="${APP_NAME}-${version}-${{ matrix.platform }}.zip"
+          arch=$(echo "$RUNNER_ARCH" | tr "[:upper:]" "[:lower:]")
+          file="${APP_NAME}-${version}-${{ matrix.platform }}-${arch}.zip"
           cd dist
           case "${{ matrix.platform }}" in
             windows) 7z a "../$file" "$APP_NAME" ;;
@@ -97,10 +99,12 @@ jobs:
           esac
           echo "file=$file" >> "$GITHUB_OUTPUT"
 
-      - uses: actions/upload-artifact@v4
+      # Upload the zip as is (no extra zip around it); the artifact takes the
+      # file's name
+      - uses: actions/upload-artifact@v7
         with:
-          name: ${{ matrix.platform }}
           path: ${{ steps.zip.outputs.file }}
+          archive: false
           if-no-files-found: error
 
   release:
@@ -111,7 +115,7 @@ jobs:
       contents: write
     steps:
       # Every artifact into one folder; only the zips get published
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           path: packages
           merge-multiple: true
