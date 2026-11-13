@@ -39,12 +39,33 @@ New packages must be added by hand to the `javac` call of their module in
 `bash/commands/java.sh`, and exported in its `module-info.java` if other
 modules use them.
 
+## Tests
+
+Unit tests live in `test/<module>/`, mirroring the packages in `src/`
+(see [ADR 0004](adr/0004-unit-tests-with-junit-on-the-classpath.md)).
+`bash init.sh test` builds the game, then:
+
+1. Compiles the tests into `test/target` with the module jars and JUnit on
+   the classpath.
+2. Runs them with the JUnit console launcher (`$JUNIT_JAR`, provided by the
+   Nix dev shell).
+
+To test a new package, just add its test class under the same package in
+`test/<module>/`.
+
+## Formatting
+
+`bash init.sh format` rewrites every Java file in `src/` and `test/` with
+google-java-format, and `bash init.sh lint` fails if any of them isn't
+formatted (see [ADR 0003](adr/0003-code-formatting-with-google-java-format.md)).
+
 ## Generated files
 
 | Path               | Content                     |
 | ------------------ | --------------------------- |
 | `src/*/target/`    | Compiled classes            |
 | `src/mods/`        | Module jars                 |
+| `test/target/`     | Compiled tests              |
 | `logs/`            | Output of `init.sh log ...` |
 
 All of them are git-ignored.
