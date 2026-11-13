@@ -1,11 +1,11 @@
-package licaza.tdefender.engine.tools.gui;
+package dev.licaza.temanahuiani.engine.tools.gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Map;
 
-import licaza.tdefender.engine.commons.misc.ColorPalette;
+import dev.licaza.temanahuiani.engine.commons.misc.ColorPalette;
 
 public class TextButton {
     public final int x, y, width, height, id;

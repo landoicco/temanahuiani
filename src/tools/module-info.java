@@ -1,9 +1,9 @@
-module licaza.tdefender.engine.tools {
+module dev.licaza.temanahuiani.engine.tools {
     requires java.desktop;
 
-    requires licaza.tdefender.engine.commons;
+    requires dev.licaza.temanahuiani.engine.commons;
     
-    exports licaza.tdefender.engine.tools.helpers;
-    exports licaza.tdefender.engine.tools.math;
-    exports licaza.tdefender.engine.tools.gui;
+    exports dev.licaza.temanahuiani.engine.tools.helpers;
+    exports dev.licaza.temanahuiani.engine.tools.math;
+    exports dev.licaza.temanahuiani.engine.tools.gui;
 }

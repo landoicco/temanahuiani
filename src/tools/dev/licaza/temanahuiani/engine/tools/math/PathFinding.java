@@ -1,9 +1,9 @@
-package licaza.tdefender.engine.tools.math;
+package dev.licaza.temanahuiani.engine.tools.math;
 
-import licaza.tdefender.engine.commons.objects.PathPoint;
+import dev.licaza.temanahuiani.engine.commons.objects.PathPoint;
 
-import static licaza.tdefender.engine.commons.misc.Constants.Directions.*;
-import static licaza.tdefender.engine.commons.misc.Constants.Tiles.*;
+import static dev.licaza.temanahuiani.engine.commons.misc.Constants.Directions.*;
+import static dev.licaza.temanahuiani.engine.commons.misc.Constants.Tiles.*;
 
 public class PathFinding {
 
