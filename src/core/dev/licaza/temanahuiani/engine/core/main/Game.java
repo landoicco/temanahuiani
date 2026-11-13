@@ -1,19 +1,20 @@
 package dev.licaza.temanahuiani.engine.core.main;
 
-import javax.swing.JFrame;
-
 import dev.licaza.temanahuiani.engine.tools.helpers.LoadSave;
+
+import javax.swing.JFrame;
 
 public class Game extends JFrame {
 
     private final double FPS_SET = 120.0;
     private final double UPS_SET = 60.0;
     private Runnable updateGameCallback;
-    private final String STATS_MSG = """
+    private final String STATS_MSG =
+            """
             ==============
                 FPS: %d
                 UPS: %d
-                """;
+            """;
 
     protected Game() {
         this("Tower Defender - Java");
@@ -26,7 +27,6 @@ public class Game extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
-
     }
 
     protected void setUpdateGameCallback(Runnable updateGameCallback) {
@@ -46,40 +46,40 @@ public class Game extends JFrame {
         return gameLoop;
     }
 
-    private final Runnable gameLoop = () -> {
+    private final Runnable gameLoop =
+            () -> {
+                double timePerFrame = 1_000_000_000.0 / FPS_SET;
+                double timePerUpdate = 1_000_000_000.0 / UPS_SET;
+                long lastTimeCheck = System.currentTimeMillis();
+                long lastFrame = System.nanoTime();
+                long lastTimeUPS = System.nanoTime();
+                int frames = 0;
+                int updates = 0;
 
-        double timePerFrame = 1_000_000_000.0 / FPS_SET;
-        double timePerUpdate = 1_000_000_000.0 / UPS_SET;
-        long lastTimeCheck = System.currentTimeMillis();
-        long lastFrame = System.nanoTime();
-        long lastTimeUPS = System.nanoTime();
-        int frames = 0;
-        int updates = 0;
+                long now;
 
-        long now;
+                while (true) {
+                    now = System.nanoTime();
 
-        while (true) {
-            now = System.nanoTime();
+                    // Render
+                    if (now - lastFrame >= timePerFrame) {
+                        lastFrame = now;
+                        repaint();
+                        frames++;
+                    }
 
-            // Render
-            if (now - lastFrame >= timePerFrame) {
-                lastFrame = now;
-                repaint();
-                frames++;
-            }
+                    // Update
+                    if (now - lastTimeUPS >= timePerUpdate) {
+                        lastTimeUPS = now;
+                        updateGameCallback.run();
+                        updates++;
+                    }
 
-            // Update
-            if (now - lastTimeUPS >= timePerUpdate) {
-                lastTimeUPS = now;
-                updateGameCallback.run();
-                updates++;
-            }
-
-            if (System.currentTimeMillis() - lastTimeCheck >= 1000) {
-                frames = 0;
-                updates = 0;
-                lastTimeCheck = System.currentTimeMillis();
-            }
-        }
-    };
+                    if (System.currentTimeMillis() - lastTimeCheck >= 1000) {
+                        frames = 0;
+                        updates = 0;
+                        lastTimeCheck = System.currentTimeMillis();
+                    }
+                }
+            };
 }

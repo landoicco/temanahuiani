@@ -40,5 +40,4 @@ public class Tile {
     public BufferedImage getSprite(int animationIndex) {
         return sprite[animationIndex];
     }
-
 }

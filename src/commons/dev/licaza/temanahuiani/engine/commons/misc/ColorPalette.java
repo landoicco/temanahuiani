@@ -1,5 +1,10 @@
 package dev.licaza.temanahuiani.engine.commons.misc;
 
 public enum ColorPalette {
-    BACKGROUND, PRIMARY, ACCENT_ONE, ACCENT_TWO, ACCENT_THREE, TEXT
+    BACKGROUND,
+    PRIMARY,
+    ACCENT_ONE,
+    ACCENT_TWO,
+    ACCENT_THREE,
+    TEXT
 }

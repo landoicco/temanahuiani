@@ -2,18 +2,16 @@ package dev.licaza.temanahuiani.demo.scenes;
 
 import static dev.licaza.temanahuiani.demo.configs.Constants.*;
 
+import dev.licaza.temanahuiani.demo.main.Game;
+import dev.licaza.temanahuiani.demo.ui.ToolBar;
+import dev.licaza.temanahuiani.engine.commons.api.SceneMethods;
+import dev.licaza.temanahuiani.engine.commons.objects.PathPoint;
+import dev.licaza.temanahuiani.engine.commons.objects.Tile;
+import dev.licaza.temanahuiani.engine.tools.helpers.LoadSave;
+
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
-import dev.licaza.temanahuiani.engine.tools.helpers.LoadSave;
-import dev.licaza.temanahuiani.engine.commons.api.SceneMethods;
-
-import dev.licaza.temanahuiani.demo.main.Game;
-
-import dev.licaza.temanahuiani.engine.commons.objects.PathPoint;
-import dev.licaza.temanahuiani.engine.commons.objects.Tile;
-import dev.licaza.temanahuiani.demo.ui.ToolBar;
 
 public class Editing extends GameScene implements SceneMethods {
 
@@ -119,9 +117,7 @@ public class Editing extends GameScene implements SceneMethods {
 
         if (selectedTile.getId() >= 0) {
 
-            if (lastTileX == tileX &&
-                    lastTileY == tileY &&
-                    lastTileId == selectedTile.getId())
+            if (lastTileX == tileX && lastTileY == tileY && lastTileId == selectedTile.getId())
                 return;
 
             lastTileX = tileX;
@@ -153,7 +149,6 @@ public class Editing extends GameScene implements SceneMethods {
                 }
             }
         }
-
     }
 
     private void drawSelectedTile(Graphics g) {
@@ -170,5 +165,4 @@ public class Editing extends GameScene implements SceneMethods {
             g.drawImage(toolBar.getEndPathImg(), end.xCord() * 32, end.yCord() * 32, null);
         }
     }
-
 }

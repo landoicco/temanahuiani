@@ -1,9 +1,9 @@
 package dev.licaza.temanahuiani.demo.configs;
 
+import dev.licaza.temanahuiani.engine.commons.misc.ColorPalette;
+
 import java.awt.Color;
 import java.util.Map;
-
-import dev.licaza.temanahuiani.engine.commons.misc.ColorPalette;
 
 public class Colors {
 
@@ -24,13 +24,14 @@ public class Colors {
     private static Map<ColorPalette, Color> colorMap;
 
     static {
-        colorMap = Map.of(
-                ColorPalette.BACKGROUND, BACKGROUND,
-                ColorPalette.PRIMARY, PRIMARY,
-                ColorPalette.ACCENT_ONE, ACCENT_ONE,
-                ColorPalette.ACCENT_TWO, ACCENT_TWO,
-                ColorPalette.ACCENT_THREE, ACCENT_THREE,
-                ColorPalette.TEXT, TEXT);
+        colorMap =
+                Map.of(
+                        ColorPalette.BACKGROUND, BACKGROUND,
+                        ColorPalette.PRIMARY, PRIMARY,
+                        ColorPalette.ACCENT_ONE, ACCENT_ONE,
+                        ColorPalette.ACCENT_TWO, ACCENT_TWO,
+                        ColorPalette.ACCENT_THREE, ACCENT_THREE,
+                        ColorPalette.TEXT, TEXT);
     }
 
     public static final Color GetColorFromPalette(ColorPalette c) {
@@ -48,6 +49,5 @@ public class Colors {
         return colorMap;
     }
 
-    private Colors() {
-    } // No instances of this...
+    private Colors() {} // No instances of this...
 }

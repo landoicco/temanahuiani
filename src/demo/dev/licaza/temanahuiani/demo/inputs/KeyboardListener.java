@@ -1,12 +1,10 @@
 package dev.licaza.temanahuiani.demo.inputs;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
-// import dev.licaza.temanahuiani.engine.core.*;
-
 import dev.licaza.temanahuiani.demo.main.Game;
 import dev.licaza.temanahuiani.demo.main.GameStates;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class KeyboardListener implements KeyListener {
 
@@ -17,8 +15,7 @@ public class KeyboardListener implements KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-    }
+    public void keyTyped(KeyEvent e) {}
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -39,7 +36,5 @@ public class KeyboardListener implements KeyListener {
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
-    }
-
+    public void keyReleased(KeyEvent e) {}
 }

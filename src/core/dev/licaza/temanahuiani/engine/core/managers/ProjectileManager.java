@@ -1,5 +1,12 @@
 package dev.licaza.temanahuiani.engine.core.managers;
 
+import static dev.licaza.temanahuiani.engine.commons.misc.Constants.Projectiles.*;
+import static dev.licaza.temanahuiani.engine.commons.misc.Constants.Towers.*;
+
+import dev.licaza.temanahuiani.engine.commons.actors.Enemy;
+import dev.licaza.temanahuiani.engine.commons.actors.Tower;
+import dev.licaza.temanahuiani.engine.commons.objects.Projectile;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
@@ -7,15 +14,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
-
-import static dev.licaza.temanahuiani.engine.commons.misc.Constants.Projectiles.*;
-import static dev.licaza.temanahuiani.engine.commons.misc.Constants.Towers.*;
-
-import dev.licaza.temanahuiani.engine.tools.helpers.LoadSave;
-
-import dev.licaza.temanahuiani.engine.commons.objects.Projectile;
-import dev.licaza.temanahuiani.engine.commons.actors.Enemy;
-import dev.licaza.temanahuiani.engine.commons.actors.Tower;
 
 public abstract class ProjectileManager {
     private ArrayList<Projectile> projectiles = new ArrayList<>();
@@ -49,8 +47,7 @@ public abstract class ProjectileManager {
             }
 
             for (Explosion e : explosions) {
-                if (e.getIndex() < 7)
-                    e.update();
+                if (e.getIndex() < 7) e.update();
             }
         }
     }
@@ -69,10 +66,12 @@ public abstract class ProjectileManager {
                     g2d.rotate(-Math.toRadians(p.getRotation()));
                     g2d.translate(-p.getPosition().x, -p.getPosition().y);
                 } else {
-                    g2d.drawImage(projectileImages[p.getProjectileType()], (int) p.getPosition().x - 16,
-                            (int) p.getPosition().y - 16, null);
+                    g2d.drawImage(
+                            projectileImages[p.getProjectileType()],
+                            (int) p.getPosition().x - 16,
+                            (int) p.getPosition().y - 16,
+                            null);
                 }
-
             }
         }
 
@@ -93,10 +92,8 @@ public abstract class ProjectileManager {
         float xSpeed = xPer * GetSpeed(type);
         float ySpeed = GetSpeed(type) - xSpeed;
 
-        if (t.getX() > e.getX())
-            xSpeed *= -1;
-        if (t.getY() > e.getY())
-            ySpeed *= -1;
+        if (t.getX() > e.getX()) xSpeed *= -1;
+        if (t.getY() > e.getY()) ySpeed *= -1;
 
         float rotate = 0;
 
@@ -104,10 +101,8 @@ public abstract class ProjectileManager {
             float arcValue = (float) Math.atan(yDistance / (float) xDistance);
             rotate = (float) Math.toDegrees(arcValue);
 
-            if (xDistance < 0)
-                rotate += 90;
-            else
-                rotate += 270;
+            if (xDistance < 0) rotate += 90;
+            else rotate += 270;
         }
 
         for (Projectile p : projectiles) {
@@ -118,9 +113,16 @@ public abstract class ProjectileManager {
                 }
         }
 
-        projectiles.add(new Projectile(t.getX() + 16, t.getY() + 16, xSpeed,
-                ySpeed, t.getDamage(), rotate, projectileID++, type));
-
+        projectiles.add(
+                new Projectile(
+                        t.getX() + 16,
+                        t.getY() + 16,
+                        xSpeed,
+                        ySpeed,
+                        t.getDamage(),
+                        rotate,
+                        projectileID++,
+                        type));
     }
 
     public void reset() {
@@ -141,8 +143,7 @@ public abstract class ProjectileManager {
                     e.hurt(p.getDamage());
 
                     /**
-                     * While developing, we are assuming the 'CHAINS' makes the
-                     * enemy to move slower
+                     * While developing, we are assuming the 'CHAINS' makes the enemy to move slower
                      */
                     if (p.getProjectileType() == CHAINS) {
                         e.slow();
@@ -168,7 +169,6 @@ public abstract class ProjectileManager {
         return 0;
     }
 
-
     private void explodeOnEnemies(Projectile p) {
         for (Enemy e : enemiesSupplier.get()) {
             if (e.isAlive()) {
@@ -187,11 +187,11 @@ public abstract class ProjectileManager {
     }
 
     /**
-     * This method is useful to distinct the projectiles that should not have any
-     * rotation when moving
-     * 
-     * In this example, we assume 'ARROW' should rotate, 'CHAINS' and 'BOMB' not
-     * 
+     * This method is useful to distinct the projectiles that should not have any rotation when
+     * moving
+     *
+     * <p>In this example, we assume 'ARROW' should rotate, 'CHAINS' and 'BOMB' not
+     *
      * @param type The integer value that represents the expected projectile
      */
     private boolean shouldProjectileRotate(int type) {
@@ -201,23 +201,22 @@ public abstract class ProjectileManager {
     private void drawExplosions(Graphics2D g2d) {
         for (Explosion e : explosions)
             if (e.getIndex() < 7)
-                g2d.drawImage(explosionImages[e.getIndex()], (int) e.getPosition().x - 16,
-                        (int) e.getPosition().y - 16, null);
+                g2d.drawImage(
+                        explosionImages[e.getIndex()],
+                        (int) e.getPosition().x - 16,
+                        (int) e.getPosition().y - 16,
+                        null);
     }
 
     private boolean isProjectileOutOfBounds(Projectile p) {
         if (p.getPosition().x >= 0)
             if (p.getPosition().x <= 640)
-                if (p.getPosition().y >= 0)
-                    if (p.getPosition().y <= 800)
-                        return false;
+                if (p.getPosition().y >= 0) if (p.getPosition().y <= 800) return false;
 
         return true;
     }
 
-    /**
-     * Since only here we care about explosions, it stays here
-     */
+    /** Since only here we care about explosions, it stays here */
     private class Explosion {
         private Point2D.Float position;
         private int tick, index;

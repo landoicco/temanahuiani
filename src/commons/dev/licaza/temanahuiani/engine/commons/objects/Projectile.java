@@ -8,8 +8,15 @@ public class Projectile {
     private boolean active = true;
     private float xSpeed, ySpeed, rotation;
 
-    public Projectile(float x, float y, float xSpeed, float ySpeed,
-            int damage, float rotation, int id, int projectileType) {
+    public Projectile(
+            float x,
+            float y,
+            float xSpeed,
+            float ySpeed,
+            int damage,
+            float rotation,
+            int id,
+            int projectileType) {
         position = new Point2D.Float(x, y);
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
@@ -24,8 +31,7 @@ public class Projectile {
         position.y += ySpeed;
     }
 
-    public void reuse(int x, int y, float xSpeed, float ySpeed,
-            int damage, float rotate) {
+    public void reuse(int x, int y, float xSpeed, float ySpeed, int damage, float rotate) {
         position = new Point2D.Float(x, y);
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;

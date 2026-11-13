@@ -1,5 +1,18 @@
 package dev.licaza.temanahuiani.demo.ui;
 
+import static dev.licaza.temanahuiani.demo.configs.Colors.*;
+import static dev.licaza.temanahuiani.demo.configs.MediaSource.*;
+import static dev.licaza.temanahuiani.demo.configs.UIPositions.Editing.ToolBar.*;
+
+import dev.licaza.temanahuiani.demo.main.GameStates;
+import dev.licaza.temanahuiani.demo.scenes.Editing;
+import dev.licaza.temanahuiani.engine.commons.misc.ColorPalette;
+import dev.licaza.temanahuiani.engine.commons.misc.IntPoint2D;
+import dev.licaza.temanahuiani.engine.commons.objects.Tile;
+import dev.licaza.temanahuiani.engine.tools.gui.MyButton;
+import dev.licaza.temanahuiani.engine.tools.gui.TextButton;
+import dev.licaza.temanahuiani.engine.tools.helpers.LoadSave;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -9,20 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.sound.sampled.Clip;
-
-import dev.licaza.temanahuiani.engine.tools.helpers.LoadSave;
-import dev.licaza.temanahuiani.engine.tools.gui.TextButton;
-import dev.licaza.temanahuiani.engine.tools.gui.MyButton;
-import dev.licaza.temanahuiani.engine.commons.objects.Tile;
-import dev.licaza.temanahuiani.engine.commons.misc.ColorPalette;
-import dev.licaza.temanahuiani.engine.commons.misc.IntPoint2D;
-
-import dev.licaza.temanahuiani.demo.main.GameStates;
-import dev.licaza.temanahuiani.demo.scenes.Editing;
-
-import static dev.licaza.temanahuiani.demo.configs.Colors.*;
-import static dev.licaza.temanahuiani.demo.configs.MediaSource.*;
-import static dev.licaza.temanahuiani.demo.configs.UIPositions.Editing.ToolBar.*;
 
 public final class ToolBar extends Bar {
 
@@ -35,7 +34,6 @@ public final class ToolBar extends Bar {
     private static final Clip HOVER_CLIP = Sounds.GetAudioClip("HOVER");
     private static final Clip CLICK_CLIP = Sounds.GetAudioClip("CLICK");
 
-
     private static final Font BASE_FONT = Fonts.GetBaseFont();
     private static final Font HEADER_FONT = Fonts.GetHeaderFont();
 
@@ -46,7 +44,13 @@ public final class ToolBar extends Bar {
     private Editing editing;
 
     private Map<MyButton, ArrayList<Tile>> tilesMap = new HashMap<>();
-    private MyButton bGrass, bWater, bPlainRoads, bCornerRoads, bWaterCorners, bWaterCoasts, bWaterIslands,
+    private MyButton bGrass,
+            bWater,
+            bPlainRoads,
+            bCornerRoads,
+            bWaterCorners,
+            bWaterCoasts,
+            bWaterIslands,
             currentButton;
     private int currentBtnIndex;
 
@@ -199,14 +203,25 @@ public final class ToolBar extends Bar {
 
     private void initButtons() {
         IntPoint2D pMenuButton = GetElementPoint("MENU_BTN"),
-            pSaveButton = GetElementPoint("SAVE_BTN");
-        int buttonsWidth = GetValue("BTNS_WIDTH"),
-            buttonsHeight = GetValue("BTNS_HEIGHT");
+                pSaveButton = GetElementPoint("SAVE_BTN");
+        int buttonsWidth = GetValue("BTNS_WIDTH"), buttonsHeight = GetValue("BTNS_HEIGHT");
 
-        bMenu = new TextButton("Menu", pMenuButton.x(), pMenuButton.y(), buttonsWidth,
-                               buttonsHeight, COLOR_MAP);
-        bSave = new TextButton("Save", pSaveButton.x(), pSaveButton.y(), buttonsWidth,
-                               buttonsHeight, COLOR_MAP);
+        bMenu =
+                new TextButton(
+                        "Menu",
+                        pMenuButton.x(),
+                        pMenuButton.y(),
+                        buttonsWidth,
+                        buttonsHeight,
+                        COLOR_MAP);
+        bSave =
+                new TextButton(
+                        "Save",
+                        pSaveButton.x(),
+                        pSaveButton.y(),
+                        buttonsWidth,
+                        buttonsHeight,
+                        COLOR_MAP);
 
         // Tile buttons properties
         int width = 50;
@@ -221,16 +236,51 @@ public final class ToolBar extends Bar {
         bWater = new MyButton("Water", xStart + xOffset, yStart, width, height, id++);
 
         // Init tile ArrayLists
-        initMapButtons(bPlainRoads, editing.getGame().getTileManager().getPlainRoads(), xStart, yStart, xOffset, width,
-                height, id++);
-        initMapButtons(bCornerRoads, editing.getGame().getTileManager().getCornerRoads(), xStart, yStart, xOffset,
-                width, height, id++);
-        initMapButtons(bWaterCorners, editing.getGame().getTileManager().getCorners(), xStart, yStart, xOffset, width,
-                height, id++);
-        initMapButtons(bWaterCoasts, editing.getGame().getTileManager().getCoasts(), xStart, yStart, xOffset, width,
-                height, id++);
-        initMapButtons(bWaterIslands, editing.getGame().getTileManager().getIslands(), xStart, yStart, xOffset, width,
-                height, id++);
+        initMapButtons(
+                bPlainRoads,
+                editing.getGame().getTileManager().getPlainRoads(),
+                xStart,
+                yStart,
+                xOffset,
+                width,
+                height,
+                id++);
+        initMapButtons(
+                bCornerRoads,
+                editing.getGame().getTileManager().getCornerRoads(),
+                xStart,
+                yStart,
+                xOffset,
+                width,
+                height,
+                id++);
+        initMapButtons(
+                bWaterCorners,
+                editing.getGame().getTileManager().getCorners(),
+                xStart,
+                yStart,
+                xOffset,
+                width,
+                height,
+                id++);
+        initMapButtons(
+                bWaterCoasts,
+                editing.getGame().getTileManager().getCoasts(),
+                xStart,
+                yStart,
+                xOffset,
+                width,
+                height,
+                id++);
+        initMapButtons(
+                bWaterIslands,
+                editing.getGame().getTileManager().getIslands(),
+                xStart,
+                yStart,
+                xOffset,
+                width,
+                height,
+                id++);
 
         // Init path definer buttons
         bPathStart = new MyButton("Start", xStart, yStart + xOffset, width, height, id++);
@@ -238,7 +288,8 @@ public final class ToolBar extends Bar {
     }
 
     private void initPathImages() {
-        pathStart = LoadSave.GetSpriteAtlas("spriteatlas_legacy").getSubimage(7 * 32, 2 * 32, 32, 32);
+        pathStart =
+                LoadSave.GetSpriteAtlas("spriteatlas_legacy").getSubimage(7 * 32, 2 * 32, 32, 32);
         pathEnd = LoadSave.GetSpriteAtlas("spriteatlas_legacy").getSubimage(8 * 32, 2 * 32, 32, 32);
     }
 
@@ -295,9 +346,9 @@ public final class ToolBar extends Bar {
     private void drawTileDescriptor(Graphics g) {
         // Background
         IntPoint2D pBackground = GetElementPoint("TILE_DESCRIPTOR"),
-            pDescription = GetElementPoint("TILE_DESCRIPTION");
+                pDescription = GetElementPoint("TILE_DESCRIPTION");
         int backgroundWidth = GetValue("TILE_DESCRIPTOR_WIDTH"),
-            backgroundHeight = GetValue("TILE_DESCRIPTOR_HEIGHT");
+                backgroundHeight = GetValue("TILE_DESCRIPTOR_HEIGHT");
         float fontSize = GetFloatValue("TILE_DESCRIPTOR_FONT_SIZE");
         g.setColor(ACCENT_THREE);
         g.fillRect(pBackground.x(), pBackground.y(), backgroundWidth, backgroundHeight);
@@ -308,7 +359,14 @@ public final class ToolBar extends Bar {
         g.drawString("description...", pDescription.x(), pDescription.y());
     }
 
-    private void initMapButtons(MyButton b, ArrayList<Tile> list, int x, int y, int xOffset, int width, int height,
+    private void initMapButtons(
+            MyButton b,
+            ArrayList<Tile> list,
+            int x,
+            int y,
+            int xOffset,
+            int width,
+            int height,
             int id) {
         b = new MyButton("", (x + xOffset * id), y, width, height, id);
         tilesMap.put(b, list);
@@ -321,5 +379,4 @@ public final class ToolBar extends Bar {
     private BufferedImage getButtonImage(int id) {
         return editing.getGame().getTileManager().getSprite(id);
     }
-
 }

@@ -40,6 +40,5 @@ public class Functions {
 
             return (int) Math.hypot(xDiff, yDiff);
         }
-
     }
 }

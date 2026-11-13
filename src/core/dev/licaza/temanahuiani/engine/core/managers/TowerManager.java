@@ -1,19 +1,16 @@
 package dev.licaza.temanahuiani.engine.core.managers;
 
+import static dev.licaza.temanahuiani.engine.tools.math.Functions.Pythagoras.*;
+
+import dev.licaza.temanahuiani.engine.commons.actors.Enemy;
+import dev.licaza.temanahuiani.engine.commons.actors.Tower;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
-
-import dev.licaza.temanahuiani.engine.tools.helpers.ImageFix;
-import dev.licaza.temanahuiani.engine.tools.helpers.LoadSave;
-
-import dev.licaza.temanahuiani.engine.commons.actors.Enemy;
-import dev.licaza.temanahuiani.engine.commons.actors.Tower;
-
-import static dev.licaza.temanahuiani.engine.tools.math.Functions.Pythagoras.*;
 
 public abstract class TowerManager {
 
@@ -26,8 +23,8 @@ public abstract class TowerManager {
 
     protected BufferedImage[] towerImgs;
 
-    public TowerManager(Supplier<List<Enemy>> enemiesSupplier,
-            BiConsumer<Tower, Enemy> shootEnemyConsumer) {
+    public TowerManager(
+            Supplier<List<Enemy>> enemiesSupplier, BiConsumer<Tower, Enemy> shootEnemyConsumer) {
         this.enemiesSupplier = enemiesSupplier;
         this.shootEnemyConsumer = shootEnemyConsumer;
 
@@ -39,7 +36,6 @@ public abstract class TowerManager {
             t.update();
             attackEnemyIfClose(t);
         }
-
     }
 
     public void draw(Graphics g) {
@@ -67,15 +63,22 @@ public abstract class TowerManager {
         // TODO: Find a good way to get tower specs. Maybe a TowerSpecs class
         damage = 50; // GetDefaultDamage(selectedTower.getTowerType());
         range = 100; // (int) GetDefaultRange(selectedTower.getTowerType());
-        cooldown = 60;// (int) GetDefaultCooldown(selectedTower.getTowerType());
+        cooldown = 60; // (int) GetDefaultCooldown(selectedTower.getTowerType());
 
-        towers.add(new Tower(xPos, yPos, towerCount++, selectedTower.getTowerType(), damage, range, cooldown));
+        towers.add(
+                new Tower(
+                        xPos,
+                        yPos,
+                        towerCount++,
+                        selectedTower.getTowerType(),
+                        damage,
+                        range,
+                        cooldown));
     }
 
     public void removeTower(Tower displayedTower) {
         for (int i = 0; i < towers.size(); i++)
-            if (towers.get(i).getId() == displayedTower.getId())
-                towers.remove(i);
+            if (towers.get(i).getId() == displayedTower.getId()) towers.remove(i);
     }
 
     public void upgradeTower(Tower displayedTower) {
@@ -84,7 +87,6 @@ public abstract class TowerManager {
                 // TODO: Add check for each kind of tower
                 t.upgradeTower(1, 10.0f, 3.0f);
         }
-
     }
 
     public void reset() {

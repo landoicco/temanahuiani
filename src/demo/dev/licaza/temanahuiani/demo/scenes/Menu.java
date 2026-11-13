@@ -1,20 +1,19 @@
 package dev.licaza.temanahuiani.demo.scenes;
 
+import static dev.licaza.temanahuiani.demo.configs.Colors.*;
+import static dev.licaza.temanahuiani.demo.configs.MediaSource.*;
+import static dev.licaza.temanahuiani.demo.configs.UIPositions.Menu.*;
+
+import dev.licaza.temanahuiani.demo.main.Game;
+import dev.licaza.temanahuiani.demo.main.GameStates;
+import dev.licaza.temanahuiani.engine.commons.api.SceneMethods;
+import dev.licaza.temanahuiani.engine.commons.misc.ColorPalette;
+import dev.licaza.temanahuiani.engine.tools.gui.TextButton;
+
 import java.awt.*;
 import java.util.Map;
 
 import javax.sound.sampled.*;
-
-import dev.licaza.temanahuiani.demo.main.Game;
-import dev.licaza.temanahuiani.demo.main.GameStates;
-
-import dev.licaza.temanahuiani.engine.tools.gui.TextButton;
-import dev.licaza.temanahuiani.engine.commons.api.SceneMethods;
-import dev.licaza.temanahuiani.engine.commons.misc.ColorPalette;
-
-import static dev.licaza.temanahuiani.demo.configs.Colors.*;
-import static dev.licaza.temanahuiani.demo.configs.MediaSource.*;
-import static dev.licaza.temanahuiani.demo.configs.UIPositions.Menu.*;
 
 public class Menu extends GameScene implements SceneMethods {
     private static final float BUTTON_FONT_SIZE = 50f;
@@ -132,8 +131,7 @@ public class Menu extends GameScene implements SceneMethods {
     }
 
     @Override
-    public void mouseDragged(int x, int y) {
-    }
+    public void mouseDragged(int x, int y) {}
 
     private void initButtons() {
         int height, width, xPos, yPos, padding;
@@ -144,9 +142,20 @@ public class Menu extends GameScene implements SceneMethods {
         padding = GetValue("BTNS_PADDING");
 
         bPlaying = new TextButton("Play", xPos, yPos, width, height, colorPalette);
-        bEdit = new TextButton("Edit", xPos, yPos + (height + padding), width, height, colorPalette);
-        bSettings = new TextButton("Credits", xPos, yPos + 2 * (height + padding), width, height, colorPalette);
-        bQuit = new TextButton("Quit", xPos, yPos + 3 * (height + padding), width, height, colorPalette);
+        bEdit =
+                new TextButton(
+                        "Edit", xPos, yPos + (height + padding), width, height, colorPalette);
+        bSettings =
+                new TextButton(
+                        "Credits",
+                        xPos,
+                        yPos + 2 * (height + padding),
+                        width,
+                        height,
+                        colorPalette);
+        bQuit =
+                new TextButton(
+                        "Quit", xPos, yPos + 3 * (height + padding), width, height, colorPalette);
     }
 
     private void drawButtons(Graphics g) {

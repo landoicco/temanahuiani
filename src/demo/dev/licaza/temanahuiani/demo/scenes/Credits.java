@@ -1,23 +1,22 @@
 package dev.licaza.temanahuiani.demo.scenes;
 
+import static dev.licaza.temanahuiani.demo.configs.Colors.*;
+import static dev.licaza.temanahuiani.demo.configs.MediaSource.*;
+import static dev.licaza.temanahuiani.demo.configs.UIPositions.Credits.*;
+
+import dev.licaza.temanahuiani.demo.main.Game;
+import dev.licaza.temanahuiani.demo.main.GameStates;
+import dev.licaza.temanahuiani.engine.commons.api.SceneMethods;
+import dev.licaza.temanahuiani.engine.commons.misc.ColorPalette;
+import dev.licaza.temanahuiani.engine.commons.misc.IntPoint2D;
+import dev.licaza.temanahuiani.engine.tools.gui.TextButton;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.util.Map;
 
 import javax.sound.sampled.*;
-
-import static dev.licaza.temanahuiani.demo.configs.MediaSource.*;
-import static dev.licaza.temanahuiani.demo.configs.UIPositions.Credits.*;
-import static dev.licaza.temanahuiani.demo.configs.Colors.*;
-
-import dev.licaza.temanahuiani.engine.tools.gui.TextButton;
-import dev.licaza.temanahuiani.engine.commons.api.SceneMethods;
-import dev.licaza.temanahuiani.engine.commons.misc.ColorPalette;
-import dev.licaza.temanahuiani.engine.commons.misc.IntPoint2D;
-
-import dev.licaza.temanahuiani.demo.main.Game;
-import dev.licaza.temanahuiani.demo.main.GameStates;
 
 public class Credits extends GameScene implements SceneMethods {
 
@@ -89,8 +88,7 @@ public class Credits extends GameScene implements SceneMethods {
     }
 
     @Override
-    public void mouseDragged(int x, int y) {
-    }
+    public void mouseDragged(int x, int y) {}
 
     private void drawCodersSection(Graphics g) {
         float fontSize = 60f;
@@ -144,8 +142,12 @@ public class Credits extends GameScene implements SceneMethods {
         g.setColor(TEXT_COLOR);
         g.setFont(BASE_FONT.deriveFont(fontSize));
         g.drawString("spriteAtlas.png", spritesTextPos.x(), spritesTextPos.y());
-        g.drawString("sprite_legacy.png.todo", spritesTextPos.x(), (spritesTextPos.y() + textYOffset));
-        g.drawString("sprite_roads.png.todo", spritesTextPos.x(), (spritesTextPos.y() + (textYOffset * 2)));
+        g.drawString(
+                "sprite_legacy.png.todo", spritesTextPos.x(), (spritesTextPos.y() + textYOffset));
+        g.drawString(
+                "sprite_roads.png.todo",
+                spritesTextPos.x(),
+                (spritesTextPos.y() + (textYOffset * 2)));
 
         // Fonts
         IntPoint2D fontSubheaderPos = GetPanel2ElementPoint("FONTS_SUBHEADER");
@@ -170,5 +172,4 @@ public class Credits extends GameScene implements SceneMethods {
         // Draw menu button
         bMenu.draw(g);
     }
-
 }

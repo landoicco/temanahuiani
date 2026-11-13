@@ -1,9 +1,9 @@
 package dev.licaza.temanahuiani.engine.commons.actors;
 
+import static dev.licaza.temanahuiani.engine.commons.misc.Constants.Directions.*;
+
 import java.awt.Rectangle;
 import java.util.function.IntConsumer;
-
-import static dev.licaza.temanahuiani.engine.commons.misc.Constants.Directions.*;
 
 public class Enemy {
 
@@ -27,12 +27,19 @@ public class Enemy {
         lastDirection = -1;
     }
 
-    public Enemy(float x, float y, int id, int enemyType, int startHealth, IntConsumer rewardPlayer) {
+    public Enemy(
+            float x, float y, int id, int enemyType, int startHealth, IntConsumer rewardPlayer) {
         this(x, y, id, enemyType, rewardPlayer);
         this.maxHealth = this.health = startHealth;
     }
 
-    public Enemy(float x, float y, int id, int enemyType, int startHealth, float speed,
+    public Enemy(
+            float x,
+            float y,
+            int id,
+            int enemyType,
+            int startHealth,
+            float speed,
             IntConsumer rewardPlayer) {
         this(x, y, enemyType, startHealth, rewardPlayer);
         this.speed = speed;

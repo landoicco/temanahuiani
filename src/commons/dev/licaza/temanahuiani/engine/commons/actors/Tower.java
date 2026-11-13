@@ -5,8 +5,7 @@ public class Tower {
     private int x, y, id, towerType, cdTick, damage, tier;
     private float range, cooldown;
 
-    public Tower(int x, int y, int id, int towerType, int damage,
-            int range, int cooldown) {
+    public Tower(int x, int y, int id, int towerType, int damage, int range, int cooldown) {
         this.x = x;
         this.y = y;
         this.id = id;
@@ -16,7 +15,6 @@ public class Tower {
         this.cooldown = cooldown;
 
         this.tier = 1;
-
     }
 
     public Tower(int x, int y, int id, int towerType) {
