@@ -3,15 +3,15 @@
 # # For design compliance, the full name of the module to be build
 # # needs to be defined on a variable
 
-DEMO_PATH=src/demo/licaza/tdefender/demo
-COMMONS_PATH=src/commons/licaza/tdefender/engine/commons
-TOOLS_PATH=src/tools/licaza/tdefender/engine/tools
-CORE_PATH=src/core/licaza/tdefender/engine/core
+DEMO_PATH=src/demo/dev/licaza/temanahuiani/demo
+COMMONS_PATH=src/commons/dev/licaza/temanahuiani/engine/commons
+TOOLS_PATH=src/tools/dev/licaza/temanahuiani/engine/tools
+CORE_PATH=src/core/dev/licaza/temanahuiani/engine/core
 
-DEMO_MODULE=licaza.tdefender.demo
-COMMONS_MODULE=licaza.tdefender.engine.commons
-TOOLS_MODULE=licaza.tdefender.engine.tools
-CORE_MODULE=licaza.tdefender.engine.core
+DEMO_MODULE=dev.licaza.temanahuiani.demo
+COMMONS_MODULE=dev.licaza.temanahuiani.engine.commons
+TOOLS_MODULE=dev.licaza.temanahuiani.engine.tools
+CORE_MODULE=dev.licaza.temanahuiani.engine.core
 
 
 ######################################################
@@ -20,7 +20,7 @@ CORE_MODULE=licaza.tdefender.engine.core
 
 # # For design compliance, we define a method for each module
 
-# licaza.tdefender.demo
+# dev.licaza.temanahuiani.demo
 build_demo() {
 
     # Safety clean...
@@ -46,7 +46,7 @@ build_demo() {
         -C src/demo/target .
 }
 
-# licaza.tdefender.engine.commons
+# dev.licaza.temanahuiani.engine.commons
 build_engine_commons() {
 
     # Safety clean...
@@ -66,7 +66,7 @@ build_engine_commons() {
     jar -cvf src/mods/${COMMONS_MODULE}.jar -C src/commons/target .
 }
 
-# licaza.tdefender.engine.tools
+# dev.licaza.temanahuiani.engine.tools
 build_engine_tools() {
 
     # Safety clean...

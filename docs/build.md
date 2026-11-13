@@ -24,13 +24,13 @@ For each module, in dependency order (`commons` → `tools` → `core` → `demo
    so each module sees the jars built before it.
 3. Pack the classes into `src/mods/<module name>.jar`. The demo jar also
    gets the contents of `src/res/` (sprites, sounds and fonts) and declares
-   `licaza.tdefender.demo.main.Game` as its entry point.
+   `dev.licaza.temanahuiani.demo.main.Game` as its entry point.
 
 Then the game runs with:
 
 ```shell
 java --module-path src/mods \
-     --module licaza.tdefender.demo/licaza.tdefender.demo.main.Game
+     --module dev.licaza.temanahuiani.demo/dev.licaza.temanahuiani.demo.main.Game
 ```
 
 ## Adding a package

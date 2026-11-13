@@ -41,7 +41,7 @@ play() {
 
     java \
         --module-path src/mods \
-        --module licaza.tdefender.demo/licaza.tdefender.demo.main.Game  
+        --module dev.licaza.temanahuiani.demo/dev.licaza.temanahuiani.demo.main.Game  
 }
 
 # Show to the user all available commands 

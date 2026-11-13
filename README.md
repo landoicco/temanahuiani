@@ -70,13 +70,13 @@ The project is split into [Java modules](https://openjdk.org/projects/jigsaw/),
 compiled in dependency order:
 
 ```
-licaza.tdefender.engine.commons    actors, waves, tiles, projectiles, constants
+dev.licaza.temanahuiani.engine.commons    actors, waves, tiles, projectiles, constants
         ▲
-licaza.tdefender.engine.tools      GUI widgets, resource loading, pathfinding
+dev.licaza.temanahuiani.engine.tools      GUI widgets, resource loading, pathfinding
         ▲
-licaza.tdefender.engine.core       base game loop and managers
+dev.licaza.temanahuiani.engine.core       base game loop and managers
         ▲
-licaza.tdefender.demo              the demo game: scenes, enemies, UI, assets
+dev.licaza.temanahuiani.demo              the demo game: scenes, enemies, UI, assets
 ```
 
 Each module only requires `java.desktop` from the JDK, plus the engine
