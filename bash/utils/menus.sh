@@ -49,6 +49,10 @@ show_long_menu() {
     echo -ne "\tCheck Java code is formatted - "
     echo_text_yellow "lint"
 
+    # test
+    echo -ne "\tBuild and run unit tests - "
+    echo_text_yellow "test"
+
     # install
     echo -ne "\tCreate executable of this game - "
     echo_text_yellow "install"

@@ -52,7 +52,33 @@ help() {
 
 # List all Java sources, skipping compiled output
 java_sources() {
-    find src -name "*.java" -not -path "*/target/*" -print0
+    find src test -name "*.java" -not -path "*/target/*" -print0
+}
+
+# Compile the tests against the built modules and run them with JUnit.
+# Tests run on the classpath (not as modules), so each test can live in the
+# same package as the class it tests. Needs a previous build_and_pack.
+run_tests() {
+    echo_text_byellow "=== Running tests ==="
+
+    if [ ! -f "$JUNIT_JAR" ]; then
+        echo_text_bred "JUNIT_JAR is not set, run 'nix develop' first."
+        return 1
+    fi
+
+    local game_jars
+    game_jars=$(ls src/mods/*.jar | tr '\n' ':')
+
+    rm -rf test/target
+
+    javac \
+        --class-path "${game_jars}${JUNIT_JAR}" \
+        -d test/target \
+        $(find test -name "*.java" -not -path "*/target/*") || return 1
+
+    java -jar "$JUNIT_JAR" execute \
+        --class-path "${game_jars}test/target" \
+        --scan-class-path test/target
 }
 
 # Rewrite all Java sources with google-java-format (AOSP style: 4 spaces)

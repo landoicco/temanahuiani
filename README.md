@@ -64,6 +64,7 @@ Run `bash init.sh` with no arguments for an interactive wizard.
 | `bash init.sh deps`           | Fresh build, list modules and their deps      |
 | `bash init.sh format`         | Format all Java code (google-java-format, AOSP style) |
 | `bash init.sh lint`           | Fail if any Java file isn't formatted         |
+| `bash init.sh test`           | Clean, build everything and run the unit tests in `test/` |
 | `bash init.sh help`           | List the available commands                   |
 | `bash init.sh build <module>` | Build `all`, `engine`, `demo`, `commons`, `tools` or `core` |
 | `bash init.sh log <command>`  | Run `build`, `bplay` or `play` writing output to `logs/`; `clear` removes them |
