@@ -1,11 +1,11 @@
-package licaza.tdefender.engine.core.managers;
+package dev.licaza.temanahuiani.engine.core.managers;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import licaza.tdefender.engine.commons.objects.Tile;
-import licaza.tdefender.engine.tools.helpers.LoadSave;
+import dev.licaza.temanahuiani.engine.commons.objects.Tile;
+import dev.licaza.temanahuiani.engine.tools.helpers.LoadSave;
 
 /**
  * Takes care of loading all images that will be displayed when playing.

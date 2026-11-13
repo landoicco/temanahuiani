@@ -1,4 +1,4 @@
-package licaza.tdefender.engine.core.managers;
+package dev.licaza.temanahuiani.engine.core.managers;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
 
-import licaza.tdefender.engine.tools.helpers.LoadSave;
-import licaza.tdefender.engine.commons.objects.PathPoint;
+import dev.licaza.temanahuiani.engine.tools.helpers.LoadSave;
+import dev.licaza.temanahuiani.engine.commons.objects.PathPoint;
 
-import static licaza.tdefender.engine.tools.math.PathFinding.*;
-import static licaza.tdefender.engine.commons.misc.Constants.Directions.*;
-import static licaza.tdefender.engine.commons.misc.Constants.Tiles.*;
+import static dev.licaza.temanahuiani.engine.tools.math.PathFinding.*;
+import static dev.licaza.temanahuiani.engine.commons.misc.Constants.Directions.*;
+import static dev.licaza.temanahuiani.engine.commons.misc.Constants.Tiles.*;
 
-import licaza.tdefender.engine.commons.actors.Enemy;
-import licaza.tdefender.engine.commons.misc.IntArrayProvider;
+import dev.licaza.temanahuiani.engine.commons.actors.Enemy;
+import dev.licaza.temanahuiani.engine.commons.misc.IntArrayProvider;
 
 public abstract class EnemyManager {
 

@@ -1,4 +1,4 @@
-package licaza.tdefender.engine.core.managers;
+package dev.licaza.temanahuiani.engine.core.managers;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
-import licaza.tdefender.engine.tools.helpers.ImageFix;
-import licaza.tdefender.engine.tools.helpers.LoadSave;
+import dev.licaza.temanahuiani.engine.tools.helpers.ImageFix;
+import dev.licaza.temanahuiani.engine.tools.helpers.LoadSave;
 
-import licaza.tdefender.engine.commons.actors.Enemy;
-import licaza.tdefender.engine.commons.actors.Tower;
+import dev.licaza.temanahuiani.engine.commons.actors.Enemy;
+import dev.licaza.temanahuiani.engine.commons.actors.Tower;
 
-import static licaza.tdefender.engine.tools.math.Functions.Pythagoras.*;
+import static dev.licaza.temanahuiani.engine.tools.math.Functions.Pythagoras.*;
 
 public abstract class TowerManager {
 

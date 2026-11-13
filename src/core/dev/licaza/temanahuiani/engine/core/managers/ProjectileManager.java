@@ -1,4 +1,4 @@
-package licaza.tdefender.engine.core.managers;
+package dev.licaza.temanahuiani.engine.core.managers;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-import static licaza.tdefender.engine.commons.misc.Constants.Projectiles.*;
-import static licaza.tdefender.engine.commons.misc.Constants.Towers.*;
+import static dev.licaza.temanahuiani.engine.commons.misc.Constants.Projectiles.*;
+import static dev.licaza.temanahuiani.engine.commons.misc.Constants.Towers.*;
 
-import licaza.tdefender.engine.tools.helpers.LoadSave;
+import dev.licaza.temanahuiani.engine.tools.helpers.LoadSave;
 
-import licaza.tdefender.engine.commons.objects.Projectile;
-import licaza.tdefender.engine.commons.actors.Enemy;
-import licaza.tdefender.engine.commons.actors.Tower;
+import dev.licaza.temanahuiani.engine.commons.objects.Projectile;
+import dev.licaza.temanahuiani.engine.commons.actors.Enemy;
+import dev.licaza.temanahuiani.engine.commons.actors.Tower;
 
 public abstract class ProjectileManager {
     private ArrayList<Projectile> projectiles = new ArrayList<>();

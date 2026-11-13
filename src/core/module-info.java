@@ -1,8 +1,8 @@
-module licaza.tdefender.engine.core {
+module dev.licaza.temanahuiani.engine.core {
     requires java.desktop;
-    requires licaza.tdefender.engine.tools;
-    requires licaza.tdefender.engine.commons;
+    requires dev.licaza.temanahuiani.engine.tools;
+    requires dev.licaza.temanahuiani.engine.commons;
 
-    exports licaza.tdefender.engine.core.managers;
-    exports licaza.tdefender.engine.core.main;
+    exports dev.licaza.temanahuiani.engine.core.managers;
+    exports dev.licaza.temanahuiani.engine.core.main;
 }

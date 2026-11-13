@@ -1,9 +1,9 @@
-package licaza.tdefender.engine.core.managers;
+package dev.licaza.temanahuiani.engine.core.managers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import licaza.tdefender.engine.commons.events.Wave;
+import dev.licaza.temanahuiani.engine.commons.events.Wave;
 
 public class WaveManager {
     private ArrayList<Wave> waves = new ArrayList<>();
