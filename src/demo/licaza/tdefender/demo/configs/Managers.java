@@ -96,11 +96,11 @@ public final class Managers {
         // We use 4 because we know we only have 4 enemy sprites at this point
         @Override
         protected void loadEnemyImages() {
-            BufferedImage atlas = MediaSource.Sprites.GetSprite("ENEMIES");
+            BufferedImage atlas = MediaSource.Sprites.GetSprite("ACTORS");
 
             for (int i = 0; i < 4; i++) {
                 // For position of enemies in spritesheet_actors
-                enemyImgs[i] = atlas.getSubimage((i * 32), 0, 32, 32);
+                enemyImgs[i] = atlas.getSubimage((i * 32) + (15 * 32), 10 * 32, 32, 32);
             }
         }
 

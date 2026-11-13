@@ -43,15 +43,12 @@ public class MediaSource {
     public final static class Sprites {
         private static final BufferedImage
             LEGACY = ResourcesLoader.Sprites.LoadSpriteFromFile(new File("spriteatlas_legacy.png")),
-            ACTORS = ResourcesLoader.Sprites.LoadSpriteFromFile(new File("spriteatlas_actors.png")),
-            ENEMIES = ResourcesLoader.Sprites.LoadSpriteFromFile(new File("enemies.png")),
-            NEW = ResourcesLoader.Sprites.LoadSpriteFromFile(new File("map.png"));
+            ACTORS = ResourcesLoader.Sprites.LoadSpriteFromFile(new File("spriteatlas_actors.png"));
 
         public static final BufferedImage GetSprite(String s) {
             return switch(s) {
             case "LEGACY" -> LEGACY;
             case "ACTORS" -> ACTORS;
-            case "ENEMIES" -> ENEMIES;
             default -> throw new IllegalArgumentException("Sprite not defined!");
             };
         }
