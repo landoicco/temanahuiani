@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 source commands/java.sh
 
@@ -100,7 +100,7 @@ lint() {
     if java_sources | xargs -0 google-java-format --aosp --dry-run --set-exit-if-changed; then
         echo_text_green "All files are formatted!"
     else
-        echo_text_bred "The files above aren't formatted, run 'bash init.sh format'."
+        echo_text_bred "The files above aren't formatted, run './init.sh format'."
         return 1
     fi
 }

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 source commands/general.sh
 source utils/outputs.sh

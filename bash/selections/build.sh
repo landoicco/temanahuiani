@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 source commands/build.sh
 
@@ -6,9 +6,6 @@ source commands/build.sh
 set_build_selection() {
     # Show selected 'selection'
     echo_text_bgreen "::: BUILD TOOLS :::"
-
-    # To prevent errors...
-    mkdir src/mods
 
     case $1 in
     # # Core modules
