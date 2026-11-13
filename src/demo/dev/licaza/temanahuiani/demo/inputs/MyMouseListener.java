@@ -25,8 +25,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                 case PLAYING:
                     game.getPlaying().mouseClicked(e.getX(), e.getY());
                     break;
-                // TODO: Change SETTING to CREDITS
-                case SETTINGS:
+                case CREDITS:
                     game.getCredits().mouseClicked(e.getX(), e.getY());
                     break;
                 case EDIT:
@@ -49,7 +48,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
             case PLAYING:
                 game.getPlaying().mousePressed(e.getX(), e.getY());
                 break;
-            case SETTINGS:
+            case CREDITS:
                 game.getCredits().mousePressed(e.getX(), e.getY());
                 break;
             case EDIT:
@@ -72,7 +71,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
             case PLAYING:
                 game.getPlaying().mouseMoved(e.getX(), e.getY());
                 break;
-            case SETTINGS:
+            case CREDITS:
                 game.getCredits().mouseMoved(e.getX(), e.getY());
                 break;
             case EDIT:
@@ -95,7 +94,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
             case PLAYING:
                 game.getPlaying().mouseReleased(e.getX(), e.getY());
                 break;
-            case SETTINGS:
+            case CREDITS:
                 game.getCredits().mouseReleased(e.getX(), e.getY());
                 break;
             case EDIT:
@@ -124,7 +123,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
             case PLAYING:
                 game.getPlaying().mouseDragged(e.getX(), e.getY());
                 break;
-            case SETTINGS:
+            case CREDITS:
                 game.getCredits().mouseDragged(e.getX(), e.getY());
                 break;
             case EDIT:

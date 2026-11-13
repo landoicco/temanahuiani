@@ -73,7 +73,7 @@ public class Game extends dev.licaza.temanahuiani.engine.core.main.Game {
             case PLAYING:
                 playing.update();
                 break;
-            case SETTINGS:
+            case CREDITS:
                 break;
             default:
                 break;
