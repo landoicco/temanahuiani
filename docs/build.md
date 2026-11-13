@@ -43,7 +43,7 @@ modules use them.
 
 Unit tests live in `test/<module>/`, mirroring the packages in `src/`
 (see [ADR 0004](adr/0004-unit-tests-with-junit-on-the-classpath.md)).
-`bash init.sh test` builds the game, then:
+`./init.sh test` builds the game, then:
 
 1. Compiles the tests into `test/target` with the module jars and JUnit on
    the classpath.
@@ -55,8 +55,8 @@ To test a new package, just add its test class under the same package in
 
 ## Formatting
 
-`bash init.sh format` rewrites every Java file in `src/` and `test/` with
-google-java-format, and `bash init.sh lint` fails if any of them isn't
+`./init.sh format` rewrites every Java file in `src/` and `test/` with
+google-java-format, and `./init.sh lint` fails if any of them isn't
 formatted (see [ADR 0003](adr/0003-code-formatting-with-google-java-format.md)).
 
 ## CI and releases

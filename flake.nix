@@ -47,7 +47,7 @@
             echo "  🧹 gjf  ${pkgs.google-java-format.version}"
             echo "  🧪 JUnit ${junitVersion}"
             echo ""
-            echo "  ''${dim}cd bash && bash init.sh bplay''${reset}"
+            echo "  ''${dim}cd bash && ./init.sh bplay''${reset}"
             echo ""
           '';
         });
