@@ -1,5 +1,19 @@
 package dev.licaza.temanahuiani.demo.scenes;
 
+import static dev.licaza.temanahuiani.demo.configs.Managers.*;
+import static dev.licaza.temanahuiani.demo.configs.MediaSource.*;
+
+import dev.licaza.temanahuiani.demo.configs.Constants.*;
+import dev.licaza.temanahuiani.demo.main.Game;
+import dev.licaza.temanahuiani.demo.ui.ActionBar;
+import dev.licaza.temanahuiani.engine.commons.actors.Enemy;
+import dev.licaza.temanahuiani.engine.commons.actors.Tower;
+import dev.licaza.temanahuiani.engine.commons.api.SceneMethods;
+import dev.licaza.temanahuiani.engine.commons.misc.IntArrayProvider;
+import dev.licaza.temanahuiani.engine.commons.objects.PathPoint;
+import dev.licaza.temanahuiani.engine.core.managers.WaveManager;
+import dev.licaza.temanahuiani.engine.tools.helpers.LoadSave;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -12,23 +26,9 @@ import java.util.function.Supplier;
 
 import javax.sound.sampled.Clip;
 
-import dev.licaza.temanahuiani.engine.tools.helpers.LoadSave;
-import dev.licaza.temanahuiani.engine.commons.objects.PathPoint;
-import dev.licaza.temanahuiani.engine.commons.actors.Enemy;
-import dev.licaza.temanahuiani.engine.commons.actors.Tower;
-import dev.licaza.temanahuiani.engine.commons.api.SceneMethods;
-import dev.licaza.temanahuiani.engine.commons.misc.IntArrayProvider;
-import dev.licaza.temanahuiani.engine.core.managers.WaveManager;
-import dev.licaza.temanahuiani.demo.main.Game;
-import dev.licaza.temanahuiani.demo.configs.Constants.*;
-import dev.licaza.temanahuiani.demo.ui.ActionBar;
-
-import static dev.licaza.temanahuiani.demo.configs.MediaSource.*;
-import static dev.licaza.temanahuiani.demo.configs.Managers.*;
-
 public class Playing extends GameScene implements SceneMethods {
 
-    private final static Clip BG_MUSIC = Sounds.GetAudioClip("PLAY");
+    private static final Clip BG_MUSIC = Sounds.GetAudioClip("PLAY");
 
     private int[][] lvl;
     private int mouseX, mouseY, goldTick;
@@ -59,24 +59,28 @@ public class Playing extends GameScene implements SceneMethods {
         loadLevel();
 
         // Init managers...
-        enemyManager = new EnemyManager(rewardPlayerCallback, removeOneLiveRunnable,
-                getTileTypeOperator, typeArrayProvider, start, end);
+        enemyManager =
+                new EnemyManager(
+                        rewardPlayerCallback,
+                        removeOneLiveRunnable,
+                        getTileTypeOperator,
+                        typeArrayProvider,
+                        start,
+                        end);
         towerManager = new TowerManager(enemiesSupplier, shootEnemyConsumer);
         projectileManager = new ProjectileManager(enemiesSupplier);
         waveManager = new WaveManager();
     }
 
     public void update() {
-        if (isGamePaused)
-            return;
+        if (isGamePaused) return;
 
         updateTick();
         waveManager.update();
 
         // Gold tick (3 secs...)
         goldTick++;
-        if (goldTick % (60 * 3) == 0)
-            actionBar.addGold(1);
+        if (goldTick % (60 * 3) == 0) actionBar.addGold(1);
 
         if (isAllEnemiesDead()) {
             if (isThereMoreWaves()) {
@@ -87,7 +91,6 @@ public class Playing extends GameScene implements SceneMethods {
                     enemyManager.getEnemies().clear();
                     waveManager.resetEnemyIndex();
                 }
-
             }
         }
         if (shouldSpawnNewEnemy()) {
@@ -175,8 +178,7 @@ public class Playing extends GameScene implements SceneMethods {
             return;
         } else {
             if (selectedTower != null) {
-                if (isTileGrass(mouseX, mouseY) &&
-                        getTowerAt(mouseX, mouseY) == null) {
+                if (isTileGrass(mouseX, mouseY) && getTowerAt(mouseX, mouseY) == null) {
                     towerManager.addTower(selectedTower, mouseX, mouseY);
 
                     removeGold(selectedTower.getTowerType());
@@ -214,8 +216,7 @@ public class Playing extends GameScene implements SceneMethods {
     }
 
     @Override
-    public void mouseDragged(int x, int y) {
-    }
+    public void mouseDragged(int x, int y) {}
 
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
@@ -261,8 +262,8 @@ public class Playing extends GameScene implements SceneMethods {
         if (selectedTower == null) {
             return;
         }
-        g.drawImage(towerManager.getTowerImgs()[selectedTower.getTowerType()],
-                mouseX, mouseY, null);
+        g.drawImage(
+                towerManager.getTowerImgs()[selectedTower.getTowerType()], mouseX, mouseY, null);
     }
 
     private void drawHighlight(Graphics g) {
@@ -278,12 +279,9 @@ public class Playing extends GameScene implements SceneMethods {
 
     private boolean isAllEnemiesDead() {
 
-        if (waveManager.isThereEnemiesLeft())
-            return false;
+        if (waveManager.isThereEnemiesLeft()) return false;
 
-        for (Enemy e : enemyManager.getEnemies())
-            if (e.isAlive())
-                return false;
+        for (Enemy e : enemyManager.getEnemies()) if (e.isAlive()) return false;
 
         return true;
     }
@@ -311,11 +309,9 @@ public class Playing extends GameScene implements SceneMethods {
                 }
             }
         }
-
     }
 
-    private void drawWaveInfos(Graphics g) {
-    }
+    private void drawWaveInfos(Graphics g) {}
 
     private void removeGold(int towerType) {
         actionBar.payForTower(towerType);
@@ -325,9 +321,7 @@ public class Playing extends GameScene implements SceneMethods {
         enemyManager.spawnEnemy(waveManager.getNextEnemy());
     }
 
-    /**
-     * On the tutorial, this name is called 'isTimeForNewEnemy'
-     */
+    /** On the tutorial, this name is called 'isTimeForNewEnemy' */
     private boolean shouldSpawnNewEnemy() {
         if (waveManager.shouldSpawnNewEnemy()) {
             if (waveManager.isThereEnemiesLeft()) {

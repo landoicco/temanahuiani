@@ -3,12 +3,11 @@ package dev.licaza.temanahuiani.demo.configs;
 import dev.licaza.temanahuiani.engine.commons.misc.IntPoint2D;
 
 /**
- * This class holds the values that define where each element on
- * each of the scenes needs to be placed.
+ * This class holds the values that define where each element on each of the scenes needs to be
+ * placed.
  */
 public final class UIPositions {
-    private UIPositions() {
-    }
+    private UIPositions() {}
 
     public static final class Menu {
         // Header
@@ -51,47 +50,45 @@ public final class UIPositions {
         public static final class ToolBar {
             // Tile descriptor
             private static final IntPoint2D TILE_DESCRIPTOR = new IntPoint2D(0, 640),
-                TILE_DESCRIPTION = new IntPoint2D(300, 660);
-            private static final int TILE_DESCRIPTOR_WIDTH = 650,
-                TILE_DESCRIPTOR_HEIGHT = 25;
+                    TILE_DESCRIPTION = new IntPoint2D(300, 660);
+            private static final int TILE_DESCRIPTOR_WIDTH = 650, TILE_DESCRIPTOR_HEIGHT = 25;
             private static final float TILE_DESCRIPTOR_FONT_SIZE = 30f;
 
             // Non-gameplay buttons
             private static final IntPoint2D MENU_BTN = new IntPoint2D(10, 735);
             private static final IntPoint2D SAVE_BTN = new IntPoint2D(10, 760);
             private static final float BTNS_FONT_SIZE = 25f;
-            private final static int BTNS_WIDTH = 100,
-                BTNS_HEIGHT = 30;
+            private static final int BTNS_WIDTH = 100, BTNS_HEIGHT = 30;
 
             // Tile buttons
             private static final IntPoint2D FIRST_TILE_BTN = new IntPoint2D(120, 680);
 
             public static final float GetFloatValue(String s) {
-                return switch(s) {
-                case "BTNS_FONT_SIZE" ->  BTNS_FONT_SIZE;
-                case "TILE_DESCRIPTOR_FONT_SIZE" -> TILE_DESCRIPTOR_FONT_SIZE;
-                default -> throw new IllegalArgumentException("Value not defined!");
+                return switch (s) {
+                    case "BTNS_FONT_SIZE" -> BTNS_FONT_SIZE;
+                    case "TILE_DESCRIPTOR_FONT_SIZE" -> TILE_DESCRIPTOR_FONT_SIZE;
+                    default -> throw new IllegalArgumentException("Value not defined!");
                 };
             }
 
             public static final int GetValue(String s) {
-                return switch(s) {
+                return switch (s) {
                     case "BTNS_WIDTH" -> BTNS_WIDTH;
                     case "BTNS_HEIGHT" -> BTNS_HEIGHT;
-                    case "TILE_DESCRIPTOR_WIDTH" ->  TILE_DESCRIPTOR_WIDTH;
-                    case "TILE_DESCRIPTOR_HEIGHT" ->  TILE_DESCRIPTOR_HEIGHT;
+                    case "TILE_DESCRIPTOR_WIDTH" -> TILE_DESCRIPTOR_WIDTH;
+                    case "TILE_DESCRIPTOR_HEIGHT" -> TILE_DESCRIPTOR_HEIGHT;
                     default -> throw new IllegalArgumentException("Value not defined!");
                 };
             }
 
             public static final IntPoint2D GetElementPoint(String s) {
                 return switch (s) {
-                case "MENU_BTN" -> MENU_BTN;
-                case "SAVE_BTN" -> SAVE_BTN;
-                case "TILE_DESCRIPTOR" -> TILE_DESCRIPTOR;
-                case "TILE_DESCRIPTION" -> TILE_DESCRIPTION;
-                case "FIRST_TILE_BTN" -> FIRST_TILE_BTN;
-                default -> throw new IllegalArgumentException("Button not defined!");
+                    case "MENU_BTN" -> MENU_BTN;
+                    case "SAVE_BTN" -> SAVE_BTN;
+                    case "TILE_DESCRIPTOR" -> TILE_DESCRIPTOR;
+                    case "TILE_DESCRIPTION" -> TILE_DESCRIPTION;
+                    case "FIRST_TILE_BTN" -> FIRST_TILE_BTN;
+                    default -> throw new IllegalArgumentException("Button not defined!");
                 };
             }
         }
@@ -111,8 +108,7 @@ public final class UIPositions {
 
             // Tower buttons
             private static final IntPoint2D FIRST_TOWER_BTN = new IntPoint2D(220, 670);
-            private static final int IMAGE_BTN_SIZE = 50,
-                    X_OFFSET = (int) (IMAGE_BTN_SIZE * 1.1f);
+            private static final int IMAGE_BTN_SIZE = 50, X_OFFSET = (int) (IMAGE_BTN_SIZE * 1.1f);
 
             // Sell/Upgrade tower buttons
             private static final IntPoint2D SELL_BTN = new IntPoint2D(480, 745);
@@ -164,8 +160,10 @@ public final class UIPositions {
                     case "BTNS_HEIGHT" -> BTNS_HEIGHT;
                     case "SPRITE_SIZE" -> SPRITE_SIZE;
                     case "NON_GAMEPLAY_BTNS_WIDTH" -> NON_GAMEPLAY_BTNS_WIDTH;
-                    case "DISPLAYED_TOWER_BACKGROUND_RECT_WIDTH" -> DISPLAYED_TOWER_BACKGROUND_RECT_WIDTH;
-                    case "DISPLAYED_TOWER_BACKGROUND_RECT_HEIGHT" -> DISPLAYED_TOWER_BACKGROUND_RECT_HEIGHT;
+                    case "DISPLAYED_TOWER_BACKGROUND_RECT_WIDTH" ->
+                            DISPLAYED_TOWER_BACKGROUND_RECT_WIDTH;
+                    case "DISPLAYED_TOWER_BACKGROUND_RECT_HEIGHT" ->
+                            DISPLAYED_TOWER_BACKGROUND_RECT_HEIGHT;
                     case "WAVE_INFO_BACKGROUND_WIDTH" -> WAVE_INFO_BACKGROUND_WIDTH;
                     case "WAVE_INFO_BACKGROUND_HEIGHT" -> WAVE_INFO_BACKGROUND_HEIGHT;
                     case "GOLD_AND_LIVES_BACKGROUND_WIDTH" -> GOLD_AND_LIVES_BACKGROUND_WIDTH;

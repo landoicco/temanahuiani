@@ -1,11 +1,11 @@
 package dev.licaza.temanahuiani.demo.main;
 
-import javax.swing.JPanel;
-
 import dev.licaza.temanahuiani.demo.inputs.*;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+
+import javax.swing.JPanel;
 
 public class GameScreen extends JPanel {
     private Game game;

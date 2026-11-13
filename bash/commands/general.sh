@@ -50,6 +50,32 @@ help() {
     show_long_menu
 }
 
+# List all Java sources, skipping compiled output
+java_sources() {
+    find src -name "*.java" -not -path "*/target/*" -print0
+}
+
+# Rewrite all Java sources with google-java-format (AOSP style: 4 spaces)
+format() {
+    echo_text_byellow "=== Formatting Java ==="
+
+    java_sources | xargs -0 google-java-format --aosp --replace
+
+    echo_text_green "Code formatted!"
+}
+
+# Fail if any Java source isn't formatted, listing the offending files
+lint() {
+    echo_text_byellow "=== Checking Java format ==="
+
+    if java_sources | xargs -0 google-java-format --aosp --dry-run --set-exit-if-changed; then
+        echo_text_green "All files are formatted!"
+    else
+        echo_text_bred "The files above aren't formatted, run 'bash init.sh format'."
+        return 1
+    fi
+}
+
 deps() {
     # For sanity, make a fresh build
     build_and_pack

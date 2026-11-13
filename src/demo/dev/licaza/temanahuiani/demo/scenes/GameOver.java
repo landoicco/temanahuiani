@@ -1,15 +1,14 @@
 package dev.licaza.temanahuiani.demo.scenes;
 
-import java.awt.Graphics;
-import java.awt.Color;
-import java.awt.Font;
-
-import dev.licaza.temanahuiani.engine.tools.gui.MyButton;
-import dev.licaza.temanahuiani.engine.commons.api.SceneMethods;
+import static dev.licaza.temanahuiani.demo.main.GameStates.*;
 
 import dev.licaza.temanahuiani.demo.main.Game;
+import dev.licaza.temanahuiani.engine.commons.api.SceneMethods;
+import dev.licaza.temanahuiani.engine.tools.gui.MyButton;
 
-import static dev.licaza.temanahuiani.demo.main.GameStates.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 
 public class GameOver extends GameScene implements SceneMethods {
     private MyButton bReplay, bMenu;
@@ -35,8 +34,7 @@ public class GameOver extends GameScene implements SceneMethods {
         if (bMenu.getBounds().contains(x, y)) {
             resetAll();
             setGameState(MENU);
-        } else if (bReplay.getBounds().contains(x, y))
-            replayGame();
+        } else if (bReplay.getBounds().contains(x, y)) replayGame();
     }
 
     @Override
@@ -44,18 +42,14 @@ public class GameOver extends GameScene implements SceneMethods {
         bMenu.setMouseOver(false);
         bReplay.setMouseOver(false);
 
-        if (bMenu.getBounds().contains(x, y))
-            bMenu.setMouseOver(true);
-        else if (bReplay.getBounds().contains(x, y))
-            bReplay.setMouseOver(true);
+        if (bMenu.getBounds().contains(x, y)) bMenu.setMouseOver(true);
+        else if (bReplay.getBounds().contains(x, y)) bReplay.setMouseOver(true);
     }
 
     @Override
     public void mousePressed(int x, int y) {
-        if (bMenu.getBounds().contains(x, y))
-            bMenu.setMousePressed(true);
-        else if (bReplay.getBounds().contains(x, y))
-            bReplay.setMousePressed(true);
+        if (bMenu.getBounds().contains(x, y)) bMenu.setMousePressed(true);
+        else if (bReplay.getBounds().contains(x, y)) bReplay.setMousePressed(true);
     }
 
     @Override
@@ -65,8 +59,7 @@ public class GameOver extends GameScene implements SceneMethods {
     }
 
     @Override
-    public void mouseDragged(int x, int y) {
-    }
+    public void mouseDragged(int x, int y) {}
 
     private void initButtons() {
 

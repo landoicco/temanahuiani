@@ -1,11 +1,11 @@
 package dev.licaza.temanahuiani.demo.inputs;
 
+import dev.licaza.temanahuiani.demo.main.Game;
+import dev.licaza.temanahuiani.demo.main.GameStates;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-
-import dev.licaza.temanahuiani.demo.main.Game;
-import dev.licaza.temanahuiani.demo.main.GameStates;
 
 public class MyMouseListener implements MouseListener, MouseMotionListener {
 
@@ -37,7 +37,6 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                     break;
                 default:
                     break;
-
             }
     }
 
@@ -61,7 +60,6 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                 break;
             default:
                 break;
-
         }
     }
 
@@ -85,7 +83,6 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                 break;
             default:
                 break;
-
         }
     }
 
@@ -109,17 +106,14 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                 break;
             default:
                 break;
-
         }
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-    }
+    public void mouseEntered(MouseEvent e) {}
 
     @Override
-    public void mouseExited(MouseEvent e) {
-    }
+    public void mouseExited(MouseEvent e) {}
 
     @Override
     public void mouseDragged(MouseEvent e) {
@@ -138,7 +132,6 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
                 break;
             default:
                 break;
-
         }
     }
 }

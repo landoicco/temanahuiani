@@ -1,21 +1,19 @@
 package dev.licaza.temanahuiani.engine.core.managers;
 
+import static dev.licaza.temanahuiani.engine.commons.misc.Constants.Directions.*;
+import static dev.licaza.temanahuiani.engine.commons.misc.Constants.Tiles.*;
+import static dev.licaza.temanahuiani.engine.tools.math.PathFinding.*;
+
+import dev.licaza.temanahuiani.engine.commons.actors.Enemy;
+import dev.licaza.temanahuiani.engine.commons.misc.IntArrayProvider;
+import dev.licaza.temanahuiani.engine.commons.objects.PathPoint;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
-
-import dev.licaza.temanahuiani.engine.tools.helpers.LoadSave;
-import dev.licaza.temanahuiani.engine.commons.objects.PathPoint;
-
-import static dev.licaza.temanahuiani.engine.tools.math.PathFinding.*;
-import static dev.licaza.temanahuiani.engine.commons.misc.Constants.Directions.*;
-import static dev.licaza.temanahuiani.engine.commons.misc.Constants.Tiles.*;
-
-import dev.licaza.temanahuiani.engine.commons.actors.Enemy;
-import dev.licaza.temanahuiani.engine.commons.misc.IntArrayProvider;
 
 public abstract class EnemyManager {
 
@@ -33,9 +31,13 @@ public abstract class EnemyManager {
     protected BufferedImage[] enemyImgs;
     protected BufferedImage slowEffect;
 
-    public EnemyManager(IntConsumer rewardPlayerCallback, Runnable removeOneLiveCallback,
-            IntBinaryOperator getTileTypeCallback, IntArrayProvider typeArrayCallback,
-            PathPoint start, PathPoint end) {
+    public EnemyManager(
+            IntConsumer rewardPlayerCallback,
+            Runnable removeOneLiveCallback,
+            IntBinaryOperator getTileTypeCallback,
+            IntArrayProvider typeArrayCallback,
+            PathPoint start,
+            PathPoint end) {
         this.start = start;
         this.end = end;
         this.enemyImgs = new BufferedImage[4];
@@ -48,7 +50,6 @@ public abstract class EnemyManager {
         loadEffectImages();
         loadEnemyImages();
         loadRoadDirectionArray();
-
     }
 
     public void update() {
@@ -79,9 +80,7 @@ public abstract class EnemyManager {
 
     public int getAmountOfAliveEnemies() {
         int size = 0;
-        for (Enemy e : enemies)
-            if (e.isAlive())
-                size++;
+        for (Enemy e : enemies) if (e.isAlive()) size++;
 
         return size;
     }
@@ -100,7 +99,6 @@ public abstract class EnemyManager {
 
     protected abstract void loadEnemyImages();
 
-
     private void drawEnemy(Enemy e, Graphics g) {
         g.drawImage(enemyImgs[e.getEnemyType()], (int) e.getX(), (int) e.getY(), null);
     }
@@ -112,13 +110,10 @@ public abstract class EnemyManager {
     }
 
     private void loadRoadDirectionArray() {
-        roadDirectionArray = GetRoadDirectionArray(typeArrayCallback.get(),
-                start, end);
+        roadDirectionArray = GetRoadDirectionArray(typeArrayCallback.get(), start, end);
     }
 
-    /**
-     * This is the PathFinding algorithm 2.0
-     */
+    /** This is the PathFinding algorithm 2.0 */
     private void updateEnemyMoveNew(Enemy e) {
         PathPoint currentTile = getEnemyTile(e);
         int direction = roadDirectionArray[currentTile.yCord()][currentTile.xCord()];
@@ -139,9 +134,7 @@ public abstract class EnemyManager {
         }
     }
 
-    /**
-     * This method is the legacy PathFinding algorithm
-     */
+    /** This method is the legacy PathFinding algorithm */
     @Deprecated
     private void updateEnemyMove(Enemy e) {
         if (e.getLastDirection() == -1) {
@@ -172,8 +165,7 @@ public abstract class EnemyManager {
         int yCord = (int) (e.getY() / 32);
         fixEnemyOffsetTile(e, direction, xCord, yCord);
 
-        if (isAtEnd(e))
-            return;
+        if (isAtEnd(e)) return;
 
         if (direction == LEFT || direction == RIGHT) {
             int newY = (int) (e.getY() + getSpeedAndHeight(UP, e.getEnemySpeed()));
@@ -209,14 +201,12 @@ public abstract class EnemyManager {
     }
 
     private boolean isAtEnd(Enemy e) {
-        return ((int) e.getX() == ((int) end.xCord() * 32)) &&
-                (e.getY() == (end.yCord() * 32));
+        return ((int) e.getX() == ((int) end.xCord() * 32)) && (e.getY() == (end.yCord() * 32));
     }
 
     private boolean isTilesTheSame(PathPoint currentTile, PathPoint newTile) {
         if (currentTile.xCord() == newTile.xCord())
-            if (currentTile.yCord() == newTile.yCord())
-                return true;
+            if (currentTile.yCord() == newTile.yCord()) return true;
 
         return false;
     }
@@ -227,7 +217,6 @@ public abstract class EnemyManager {
             case UP -> new PathPoint((int) (e.getX() / 32), (int) ((e.getY() + 31) / 32));
             case RIGHT, DOWN -> new PathPoint((int) (e.getX() / 32), (int) (e.getY() / 32));
             default -> new PathPoint((int) (e.getX() / 32), (int) (e.getY() / 32));
-
         };
     }
 
@@ -255,12 +244,14 @@ public abstract class EnemyManager {
 
     private void drawHealthBar(Enemy e, Graphics g) {
         g.setColor(Color.red);
-        g.fillRect((int) e.getX() + 16 - (getNewBarWidth(e) / 2), (int) e.getY() - 10, getNewBarWidth(e), 3);
-
+        g.fillRect(
+                (int) e.getX() + 16 - (getNewBarWidth(e) / 2),
+                (int) e.getY() - 10,
+                getNewBarWidth(e),
+                3);
     }
 
     private int getNewBarWidth(Enemy e) {
         return (int) (HPbarWidth * e.getHealthBarFloat());
     }
-
 }

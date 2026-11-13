@@ -1,13 +1,14 @@
 package dev.licaza.temanahuiani.engine.tools.math;
 
-import dev.licaza.temanahuiani.engine.commons.objects.PathPoint;
-
 import static dev.licaza.temanahuiani.engine.commons.misc.Constants.Directions.*;
 import static dev.licaza.temanahuiani.engine.commons.misc.Constants.Tiles.*;
 
+import dev.licaza.temanahuiani.engine.commons.objects.PathPoint;
+
 public class PathFinding {
 
-    public static int[][] GetRoadDirectionArray(int[][] lvlTypeArr, PathPoint start, PathPoint end) {
+    public static int[][] GetRoadDirectionArray(
+            int[][] lvlTypeArr, PathPoint start, PathPoint end) {
         int[][] roadDirectionArray = new int[lvlTypeArr.length][lvlTypeArr[0].length];
 
         PathPoint currentTile = start;
@@ -17,8 +18,7 @@ public class PathFinding {
         while (!IsCurrentTileSameAsEndTile(currentTile, end)) {
             PathPoint previousTile = currentTile;
             currentTile = GetNextRoadTile(previousTile, lastDirection, lvlTypeArr);
-            lastDirection = GetDirectionFromPreviousTileToCurrentTile(
-                    previousTile, currentTile);
+            lastDirection = GetDirectionFromPreviousTileToCurrentTile(previousTile, currentTile);
 
             roadDirectionArray[previousTile.yCord()][previousTile.xCord()] = lastDirection;
         }
@@ -27,8 +27,8 @@ public class PathFinding {
         return roadDirectionArray;
     }
 
-    private static PathPoint GetNextRoadTile(PathPoint previousTile, int lastDirection,
-            int[][] lvlTypeArr) {
+    private static PathPoint GetNextRoadTile(
+            PathPoint previousTile, int lastDirection, int[][] lvlTypeArr) {
         int testDirection = lastDirection;
         PathPoint testTile = GetTileInDirection(previousTile, testDirection, lastDirection);
 
@@ -44,29 +44,35 @@ public class PathFinding {
         return testTile;
     }
 
-    private static PathPoint GetTileInDirection(PathPoint previousTile, int testDirection,
-            int lastDirection) {
+    private static PathPoint GetTileInDirection(
+            PathPoint previousTile, int testDirection, int lastDirection) {
         return switch (testDirection) {
             case LEFT -> {
-                yield (lastDirection != RIGHT) ? new PathPoint(previousTile.xCord() - 1, previousTile.yCord()) : null;
+                yield (lastDirection != RIGHT)
+                        ? new PathPoint(previousTile.xCord() - 1, previousTile.yCord())
+                        : null;
             }
             case UP -> {
-                yield (lastDirection != DOWN) ? new PathPoint(previousTile.xCord(), previousTile.yCord() - 1) : null;
+                yield (lastDirection != DOWN)
+                        ? new PathPoint(previousTile.xCord(), previousTile.yCord() - 1)
+                        : null;
             }
             case RIGHT -> {
-                yield (lastDirection != LEFT) ? new PathPoint(previousTile.xCord() + 1, previousTile.yCord()) : null;
+                yield (lastDirection != LEFT)
+                        ? new PathPoint(previousTile.xCord() + 1, previousTile.yCord())
+                        : null;
             }
             case DOWN -> {
-                yield (lastDirection != UP) ? new PathPoint(previousTile.xCord(), previousTile.yCord() + 1) : null;
+                yield (lastDirection != UP)
+                        ? new PathPoint(previousTile.xCord(), previousTile.yCord() + 1)
+                        : null;
             }
             default -> null;
         };
     }
 
     private static boolean IsCurrentTileSameAsEndTile(PathPoint currentTile, PathPoint end) {
-        if (currentTile.xCord() == end.xCord())
-            if (currentTile.yCord() == end.yCord())
-                return true;
+        if (currentTile.xCord() == end.xCord()) if (currentTile.yCord() == end.yCord()) return true;
 
         return false;
     }
@@ -83,20 +89,16 @@ public class PathFinding {
         return false;
     }
 
-    private static int GetDirectionFromPreviousTileToCurrentTile(PathPoint previousTile,
-            PathPoint currentTile) {
+    private static int GetDirectionFromPreviousTileToCurrentTile(
+            PathPoint previousTile, PathPoint currentTile) {
         // Up or down
         if (previousTile.xCord() == currentTile.xCord()) {
-            if (previousTile.yCord() > currentTile.yCord())
-                return UP;
-            else
-                return DOWN;
+            if (previousTile.yCord() > currentTile.yCord()) return UP;
+            else return DOWN;
             // Right or left
         } else {
-            if (previousTile.xCord() > currentTile.xCord())
-                return LEFT;
-            else
-                return RIGHT;
+            if (previousTile.xCord() > currentTile.xCord()) return LEFT;
+            else return RIGHT;
         }
     }
 }

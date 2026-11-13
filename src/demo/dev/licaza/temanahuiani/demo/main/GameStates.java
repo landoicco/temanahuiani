@@ -1,11 +1,15 @@
 package dev.licaza.temanahuiani.demo.main;
 
-import javax.sound.sampled.Clip;
-
 import static dev.licaza.temanahuiani.demo.configs.MediaSource.*;
 
+import javax.sound.sampled.Clip;
+
 public enum GameStates {
-    PLAYING, MENU, SETTINGS, EDIT, GAME_OVER;
+    PLAYING,
+    MENU,
+    SETTINGS,
+    EDIT,
+    GAME_OVER;
 
     private static final Clip menuClip = Sounds.GetAudioClip("MENU");
     private static final Clip playClip = Sounds.GetAudioClip("PLAY");
@@ -15,7 +19,7 @@ public enum GameStates {
     public static void setGameState(GameStates state) {
 
         // Select background music to play...
-        if(state == MENU) {
+        if (state == MENU) {
             playClip.stop();
             menuClip.start();
         }

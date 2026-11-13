@@ -1,5 +1,9 @@
 package dev.licaza.temanahuiani.engine.tools.helpers;
 
+import static dev.licaza.temanahuiani.engine.tools.math.Functions.Matrix.*;
+
+import dev.licaza.temanahuiani.engine.commons.objects.PathPoint;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,15 +15,12 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
-import static dev.licaza.temanahuiani.engine.tools.math.Functions.Matrix.*;
-
-import dev.licaza.temanahuiani.engine.commons.objects.PathPoint;
-
 public class LoadSave {
 
     public static BufferedImage GetSpriteAtlas() {
         BufferedImage img = null;
-        InputStream is = LoadSave.class.getClassLoader().getResourceAsStream("spriteatlas_roads.png");
+        InputStream is =
+                LoadSave.class.getClassLoader().getResourceAsStream("spriteatlas_roads.png");
         try {
             img = ImageIO.read(is);
         } catch (IOException e) {
@@ -104,7 +105,6 @@ public class LoadSave {
         points.add(new PathPoint(list.get(402), list.get(403)));
 
         return points;
-
     }
 
     private static void WriteToFile(File file, int[] idArr, PathPoint start, PathPoint end) {

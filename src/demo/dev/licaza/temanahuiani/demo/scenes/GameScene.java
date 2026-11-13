@@ -1,9 +1,8 @@
 package dev.licaza.temanahuiani.demo.scenes;
 
-import java.awt.image.BufferedImage;
-
-
 import dev.licaza.temanahuiani.demo.main.Game;
+
+import java.awt.image.BufferedImage;
 
 public abstract class GameScene {
 

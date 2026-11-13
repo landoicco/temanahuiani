@@ -1,7 +1,7 @@
 package dev.licaza.temanahuiani.engine.tools.helpers;
 
-import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class ImageFix {
 
@@ -37,7 +37,8 @@ public class ImageFix {
     }
 
     // Rotate an image created from two images, second image only is rotated
-    public static BufferedImage GetRotatedBuildedImage(BufferedImage[] imgs, int rotAngle, int rotAtIndex) {
+    public static BufferedImage GetRotatedBuildedImage(
+            BufferedImage[] imgs, int rotAngle, int rotAtIndex) {
         int width = imgs[0].getWidth();
         int height = imgs[0].getHeight();
 
@@ -60,8 +61,8 @@ public class ImageFix {
 
     // Rotate an image created from two images, second image only is rotated +
     // animation
-    public static BufferedImage[] GetRotatedBuildedImage(BufferedImage[] imgs, BufferedImage topImg, int rotAngle,
-            int rotAtIndex) {
+    public static BufferedImage[] GetRotatedBuildedImage(
+            BufferedImage[] imgs, BufferedImage topImg, int rotAngle, int rotAtIndex) {
         int width = imgs[0].getWidth();
         int height = imgs[0].getHeight();
         BufferedImage[] arr = new BufferedImage[imgs.length];

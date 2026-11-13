@@ -1,14 +1,13 @@
 package dev.licaza.temanahuiani.demo.main;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import static dev.licaza.temanahuiani.demo.configs.Managers.TileManager;
 
 import dev.licaza.temanahuiani.demo.scenes.*;
 
-public class Game extends
-        dev.licaza.temanahuiani.engine.core.main.Game {
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class Game extends dev.licaza.temanahuiani.engine.core.main.Game {
 
     private GameScreen gameScreen;
     private TileManager tileManager;
@@ -49,8 +48,7 @@ public class Game extends
             service = Executors.newSingleThreadExecutor();
             service.execute(getGameLoop());
         } finally {
-            if (service != null)
-                service.shutdown();
+            if (service != null) service.shutdown();
         }
     }
 
@@ -79,7 +77,6 @@ public class Game extends
                 break;
             default:
                 break;
-
         }
     }
 

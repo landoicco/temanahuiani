@@ -24,6 +24,12 @@ set_general_selection() {
     "deps")
         deps
         ;;
+    "format")
+        format
+        ;;
+    "lint")
+        lint
+        ;;
     *)
         echo_text_bred "ERROR: Unknown selection."
         ;;

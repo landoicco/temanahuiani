@@ -33,7 +33,9 @@ nix develop
 ```
 
 Without Nix, any recent JDK with `java`, `javac`, `jar` and `jdeps` on the
-`PATH` will do.
+`PATH` will do. To format or lint the code you also need
+[google-java-format](https://github.com/google/google-java-format) on the
+`PATH`.
 
 ## 🎮 How to play?
 
@@ -60,6 +62,8 @@ Run `bash init.sh` with no arguments for an interactive wizard.
 | `bash init.sh play`           | Play using the last build                     |
 | `bash init.sh clean`          | Remove all previous builds                    |
 | `bash init.sh deps`           | Fresh build, list modules and their deps      |
+| `bash init.sh format`         | Format all Java code (google-java-format, AOSP style) |
+| `bash init.sh lint`           | Fail if any Java file isn't formatted         |
 | `bash init.sh help`           | List the available commands                   |
 | `bash init.sh build <module>` | Build `all`, `engine`, `demo`, `commons`, `tools` or `core` |
 | `bash init.sh log <command>`  | Run `build`, `bplay` or `play` writing output to `logs/`; `clear` removes them |

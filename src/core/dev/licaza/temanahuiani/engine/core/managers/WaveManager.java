@@ -1,9 +1,9 @@
 package dev.licaza.temanahuiani.engine.core.managers;
 
+import dev.licaza.temanahuiani.engine.commons.events.Wave;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import dev.licaza.temanahuiani.engine.commons.events.Wave;
 
 public class WaveManager {
     private ArrayList<Wave> waves = new ArrayList<>();
@@ -51,8 +51,7 @@ public class WaveManager {
     }
 
     public boolean isThereEnemiesLeft() {
-        return enemyIndex < waves.get(waveIndex)
-                .enemyList().size();
+        return enemyIndex < waves.get(waveIndex).enemyList().size();
     }
 
     public boolean isThereMoreWaves() {
@@ -95,10 +94,8 @@ public class WaveManager {
     }
 
     private void createWaves() {
-        waves.add(new Wave(new ArrayList<Integer>(Arrays
-                .asList(1, 1, 1, 1, 1, 1, 1, 1, 1, 1))));
+        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(1, 1, 1, 1, 1, 1, 1, 1, 1, 1))));
 
-        waves.add(new Wave(new ArrayList<Integer>(Arrays
-                .asList(2, 2, 2, 2, 2, 2, 2, 2, 2, 2))));
+        waves.add(new Wave(new ArrayList<Integer>(Arrays.asList(2, 2, 2, 2, 2, 2, 2, 2, 2, 2))));
     }
 }

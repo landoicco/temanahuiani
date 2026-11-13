@@ -15,5 +15,4 @@ public interface SceneMethods {
     public void mouseReleased(int x, int y);
 
     public void mouseDragged(int x, int y);
-
 }

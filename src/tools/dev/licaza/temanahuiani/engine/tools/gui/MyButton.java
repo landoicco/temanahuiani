@@ -6,7 +6,6 @@ import java.awt.Rectangle;
 
 public class MyButton {
     public final int x, y, width, height, id;
-
     private boolean mouseOver, mousePressed;
     private String text;
     private Rectangle bounds;
@@ -90,10 +89,8 @@ public class MyButton {
     }
 
     private void drawBody(Graphics g) {
-        if (mouseOver)
-            g.setColor(Color.CYAN);
-        else
-            g.setColor(Color.ORANGE);
+        if (mouseOver) g.setColor(Color.CYAN);
+        else g.setColor(Color.ORANGE);
 
         g.fillRect(x, y, width, height);
     }
@@ -102,9 +99,7 @@ public class MyButton {
         int textWidth = g.getFontMetrics().stringWidth(text);
         int textHeight = g.getFontMetrics().getHeight();
 
-        g.drawString(
-                text, x - (textWidth / 2) + (width / 2),
-                y + (textHeight / 2) + (height / 2));
+        g.drawString(text, x - (textWidth / 2) + (width / 2), y + (textHeight / 2) + (height / 2));
     }
 
     private void initBounds() {

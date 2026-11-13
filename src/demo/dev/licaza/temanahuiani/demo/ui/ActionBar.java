@@ -1,5 +1,17 @@
 package dev.licaza.temanahuiani.demo.ui;
 
+import static dev.licaza.temanahuiani.demo.configs.Colors.*;
+import static dev.licaza.temanahuiani.demo.configs.MediaSource.*;
+import static dev.licaza.temanahuiani.demo.configs.UIPositions.Playing.ActionBar.*;
+import static dev.licaza.temanahuiani.demo.main.GameStates.*;
+
+import dev.licaza.temanahuiani.demo.configs.Constants.Towers;
+import dev.licaza.temanahuiani.demo.scenes.Playing;
+import dev.licaza.temanahuiani.engine.commons.actors.Tower;
+import dev.licaza.temanahuiani.engine.commons.misc.ColorPalette;
+import dev.licaza.temanahuiani.engine.commons.misc.IntPoint2D;
+import dev.licaza.temanahuiani.engine.tools.gui.*;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -7,20 +19,6 @@ import java.text.DecimalFormat;
 import java.util.Map;
 
 import javax.sound.sampled.Clip;
-
-import dev.licaza.temanahuiani.demo.configs.Constants.Towers;
-
-import dev.licaza.temanahuiani.engine.tools.gui.*;
-import dev.licaza.temanahuiani.engine.commons.actors.Tower;
-import dev.licaza.temanahuiani.engine.commons.misc.ColorPalette;
-import dev.licaza.temanahuiani.engine.commons.misc.IntPoint2D;
-
-import static dev.licaza.temanahuiani.demo.main.GameStates.*;
-import static dev.licaza.temanahuiani.demo.configs.MediaSource.*;
-import static dev.licaza.temanahuiani.demo.configs.UIPositions.Playing.ActionBar.*;
-import static dev.licaza.temanahuiani.demo.configs.Colors.*;
-
-import dev.licaza.temanahuiani.demo.scenes.Playing;
 
 public final class ActionBar extends Bar {
 
@@ -51,10 +49,9 @@ public final class ActionBar extends Bar {
     private MyButton[] towerButtons;
     private DecimalFormat formatter;
 
-    /**
-     * We use gold as the currency of this game
-     */
+    /** We use gold as the currency of this game */
     private int gold = 100, towerCostType;
+
     private int lives = 25;
     private boolean showTowerCost;
 
@@ -76,8 +73,7 @@ public final class ActionBar extends Bar {
 
         drawWaveInfo(g);
 
-        if (showTowerCost)
-            drawTowerCost(g);
+        if (showTowerCost) drawTowerCost(g);
 
         // Game pause text
         if (playing.isGamePaused()) {
@@ -102,9 +98,9 @@ public final class ActionBar extends Bar {
                 if (bSellTower.getBounds().contains(x, y)) {
                     sellTowerClicked();
                     return;
-                } else if (bUpgradeTower.getBounds().contains(x, y) &&
-                        (displayedTower.getTier() < 3) &&
-                        hasEnoughGoldToBuy(displayedTower)) {
+                } else if (bUpgradeTower.getBounds().contains(x, y)
+                        && (displayedTower.getTier() < 3)
+                        && hasEnoughGoldToBuy(displayedTower)) {
                     upgradeTowerClicked();
                     return;
                 }
@@ -113,8 +109,7 @@ public final class ActionBar extends Bar {
             // Tower adquired!
             for (MyButton b : towerButtons) {
                 if (b.getBounds().contains(x, y)) {
-                    if (!isGoldEnoughForTower(b.getId()))
-                        return;
+                    if (!isGoldEnoughForTower(b.getId())) return;
 
                     // Play money sound
                     MONEY_CLIP.start();
@@ -152,7 +147,8 @@ public final class ActionBar extends Bar {
                 if (bSellTower.getBounds().contains(x, y)) {
                     bSellTower.setMouseOver(true);
                     return;
-                } else if (bUpgradeTower.getBounds().contains(x, y) && displayedTower.getTier() < 3) {
+                } else if (bUpgradeTower.getBounds().contains(x, y)
+                        && displayedTower.getTier() < 3) {
                     bUpgradeTower.setMouseOver(true);
                     return;
                 }
@@ -179,7 +175,8 @@ public final class ActionBar extends Bar {
                 if (bSellTower.getBounds().contains(x, y)) {
                     bSellTower.setMousePressed(true);
                     return;
-                } else if (bUpgradeTower.getBounds().contains(x, y) && displayedTower.getTier() < 3) {
+                } else if (bUpgradeTower.getBounds().contains(x, y)
+                        && displayedTower.getTier() < 3) {
                     bUpgradeTower.setMousePressed(true);
                     return;
                 }
@@ -221,10 +218,8 @@ public final class ActionBar extends Bar {
     private void togglePause() {
         playing.setGamePaused(!playing.isGamePaused());
 
-        if (playing.isGamePaused())
-            bPause.setText("Unpause");
-        else
-            bPause.setText("Pause");
+        if (playing.isGamePaused()) bPause.setText("Unpause");
+        else bPause.setText("Pause");
     }
 
     public void addGold(int amount) {
@@ -242,8 +237,7 @@ public final class ActionBar extends Bar {
     public void removeOneLive() {
         lives--;
         // Game over...
-        if (lives <= 0)
-            setGameState(GAME_OVER);
+        if (lives <= 0) setGameState(GAME_OVER);
     }
 
     public int getLives() {
@@ -258,26 +252,43 @@ public final class ActionBar extends Bar {
                 buttonsHeight = GetValue("BTNS_HEIGHT"),
                 buttonsWidth = GetValue("NON_GAMEPLAY_BTNS_WIDTH");
 
-        bMenu = new TextButton("Menu", pMenu.x(), pMenu.y(), buttonsWidth, buttonsHeight, COLOR_MAP);
-        bPause = new TextButton("Pause", pPause.x(), pPause.y(), buttonsWidth, buttonsHeight, COLOR_MAP);
+        bMenu =
+                new TextButton(
+                        "Menu", pMenu.x(), pMenu.y(), buttonsWidth, buttonsHeight, COLOR_MAP);
+        bPause =
+                new TextButton(
+                        "Pause", pPause.x(), pPause.y(), buttonsWidth, buttonsHeight, COLOR_MAP);
 
         towerButtons = new MyButton[3];
 
         IntPoint2D firstTowerButton = GetGameplayButtonPoint("TOWER");
-        int towerButtonSize = GetValue("IMAGE_BTN_SIZE"),
-                xOffset = GetValue("X_OFFSET");
+        int towerButtonSize = GetValue("IMAGE_BTN_SIZE"), xOffset = GetValue("X_OFFSET");
 
         for (int i = 0; i < towerButtons.length; i++) {
-            towerButtons[i] = new MyButton("", firstTowerButton.x() + (xOffset * i), firstTowerButton.y(),
-                    towerButtonSize, towerButtonSize, i);
+            towerButtons[i] =
+                    new MyButton(
+                            "",
+                            firstTowerButton.x() + (xOffset * i),
+                            firstTowerButton.y(),
+                            towerButtonSize,
+                            towerButtonSize,
+                            i);
         }
 
         IntPoint2D pSell = GetGameplayButtonPoint("SELL"),
                 pUpgrade = GetGameplayButtonPoint("UPGRADE");
 
-        bSellTower = new TextButton("Sell", pSell.x(), pSell.y(), sellButtonWidth, buttonsHeight, COLOR_MAP);
-        bUpgradeTower = new TextButton("Upgrade", pUpgrade.x(), pUpgrade.y(), upgradeButtonWidth,
-                buttonsHeight, COLOR_MAP);
+        bSellTower =
+                new TextButton(
+                        "Sell", pSell.x(), pSell.y(), sellButtonWidth, buttonsHeight, COLOR_MAP);
+        bUpgradeTower =
+                new TextButton(
+                        "Upgrade",
+                        pUpgrade.x(),
+                        pUpgrade.y(),
+                        upgradeButtonWidth,
+                        buttonsHeight,
+                        COLOR_MAP);
     }
 
     private void drawDisplayedTower(Graphics g) {
@@ -297,8 +308,13 @@ public final class ActionBar extends Bar {
         // Draw tower sprite
         IntPoint2D pSprite = GetLabelPoint("SPRITE");
         int spriteSize = GetValue("SPRITE_SIZE");
-        g.drawImage(playing.getTowerManager().getTowerImgs()[displayedTower.getTowerType()],
-                pSprite.x(), pSprite.y(), spriteSize, spriteSize, null);
+        g.drawImage(
+                playing.getTowerManager().getTowerImgs()[displayedTower.getTowerType()],
+                pSprite.x(),
+                pSprite.y(),
+                spriteSize,
+                spriteSize,
+                null);
 
         // Draw text
         g.setColor(TEXT_COLOR);
@@ -309,7 +325,10 @@ public final class ActionBar extends Bar {
                 pTowerTierLabel = GetLabelPoint("TOWER_TIER"),
                 pSellLabel = GetLabelPoint("SELL"),
                 pUpgradeLabel = GetLabelPoint("UPGRADE");
-        g.drawString(Towers.GetName(displayedTower.getTowerType()), pTowerNameLabel.x(), pTowerNameLabel.y());
+        g.drawString(
+                Towers.GetName(displayedTower.getTowerType()),
+                pTowerNameLabel.x(),
+                pTowerNameLabel.y());
         g.drawString("ID: " + displayedTower.getId(), pTowerIdLabel.x(), pTowerIdLabel.y());
         g.drawString("Tier: " + displayedTower.getTier(), pTowerTierLabel.x(), pTowerTierLabel.y());
 
@@ -324,9 +343,14 @@ public final class ActionBar extends Bar {
 
         g.setColor(TEXT_COLOR);
         if (bSellTower.isMouseOver()) {
-            g.drawString("Sell for: " + getSellAmount(displayedTower) + "g", pSellLabel.x(), pSellLabel.y());
+            g.drawString(
+                    "Sell for: " + getSellAmount(displayedTower) + "g",
+                    pSellLabel.x(),
+                    pSellLabel.y());
         } else if (bUpgradeTower.isMouseOver() && hasEnoughGoldToBuy(displayedTower)) {
-            g.drawString("Upgrade for: " + getUpgradeAmount(displayedTower) + "g", pUpgradeLabel.x(),
+            g.drawString(
+                    "Upgrade for: " + getUpgradeAmount(displayedTower) + "g",
+                    pUpgradeLabel.x(),
                     pUpgradeLabel.y());
         }
     }
@@ -341,7 +365,13 @@ public final class ActionBar extends Bar {
         for (MyButton b : towerButtons) {
             g.setColor(ACCENT_TWO);
             g.fillRect(b.x, b.y, b.width, b.height);
-            g.drawImage(playing.getTowerManager().getTowerImgs()[b.id], b.x, b.y, b.width, b.height, null);
+            g.drawImage(
+                    playing.getTowerManager().getTowerImgs()[b.id],
+                    b.x,
+                    b.y,
+                    b.width,
+                    b.height,
+                    null);
             drawButtonFeedback(g, b);
         }
     }
@@ -355,7 +385,8 @@ public final class ActionBar extends Bar {
         g.setColor(ACCENT_THREE);
 
         // Logic to centre the tower range
-        g.drawOval(displayedTower.getX() + 16 - (int) (displayedTower.getRange()),
+        g.drawOval(
+                displayedTower.getX() + 16 - (int) (displayedTower.getRange()),
                 displayedTower.getY() + 16 - (int) (displayedTower.getRange()),
                 (int) displayedTower.getRange() * 2,
                 (int) displayedTower.getRange() * 2);
