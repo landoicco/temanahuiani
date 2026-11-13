@@ -21,6 +21,33 @@ Use an icon spritesheet (play, pause, mute, settings, home, arrows...) for
 settings, pause and mute buttons. Kenney's *Game Icons* pack is a good
 candidate.
 
+### Release builds with GitHub Actions
+
+Add a CI workflow that builds the game and publishes runnable packages for
+Windows, Linux and macOS, so players don't need a JDK or the `bash/` scripts.
+`jpackage` can create one native package per OS, running on a matrix of
+GitHub runners (`windows-latest`, `ubuntu-latest`, `macos-latest`).
+
+### New tile system (PR #7, parked)
+
+PR #7 (`subfeature/redo_tilemanager_and_loading_logic`, draft) replaces the
+fixed tile list with `SpriteSheet` objects (one per terrain, starting with
+`Sand`) and adds a generic toolbar to the engine (`tools.gui.bar`). It is
+parked until the new terrain atlas is sourced. To resume it:
+
+- Load the new licensed terrain atlas instead of the missing `map.png`
+  (`GROUNDS`).
+- Give the new tiles their right types: every `Sand` tile is type `0`
+  (`WATER`), and `default_level.txt` is all `0`, so there are no roads for
+  enemies and no grass for towers.
+- Restore the terrains removed by the PR (grass, water, roads) as sprite
+  sheets.
+- Merge `master` into it: conflicts in `README.md` and `MediaSource.java`
+  (drop `ENEMIES`/`enemies.png`, removed in PR #6), plus the package rename
+  if it lands first.
+- Credit `favicon.png` in `src/res/LICENSES.txt`.
+- Clean up the code (the PR's "TODO: CLEAN CODE" commit).
+
 ### Version label on the menu
 
 Show the game version in a corner of the menu, e.g. `v0.0.1` at the bottom

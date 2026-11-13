@@ -10,7 +10,7 @@
 | `licaza.tdefender.demo`           | The demo game built on top of the engine                     |
 
 The engine modules know nothing about the demo. The demo extends engine
-classes (`Game`, `EnemyManager`, `TileManager`) and fills in the game-specific
+classes (`Game` and the abstract managers) and fills in the game-specific
 parts.
 
 ## Game loop
@@ -50,12 +50,29 @@ exposing `update()`, `draw(Graphics)` and `reset()`:
 | ------------------- | ---------------------------------------------------- |
 | `TileManager`       | Sprite atlas and tile definitions (abstract)         |
 | `EnemyManager`      | Enemies on the map, spawning and rewards (abstract)  |
-| `TowerManager`      | Placed towers, upgrades and targeting                |
-| `ProjectileManager` | Projectiles, hits and explosions                     |
+| `TowerManager`      | Placed towers, upgrades and targeting (abstract)     |
+| `ProjectileManager` | Projectiles, hits and explosions (abstract)          |
 | `WaveManager`       | Waves and the timers between them                    |
 
 Managers talk to each other through callbacks (`Supplier`, `IntConsumer`,
 `Runnable`) instead of direct references, so they stay decoupled.
+
+The demo implements the abstract managers as nested classes of
+`demo.configs.Managers` with the same names (`Managers.TileManager`,
+`Managers.EnemyManager`...). They load the game-specific sprites and create
+the demo's enemies and tiles.
+
+## Demo configs
+
+`demo.configs` keeps the game-specific values in one place:
+
+| Class         | Holds                                                                  |
+| ------------- | ---------------------------------------------------------------------- |
+| `Constants`   | Tile types, plus enemy, projectile and tower ids and their stats       |
+| `Colors`      | UI color palette                                                       |
+| `MediaSource` | Fonts, sounds and sprite atlases, loaded once from the classpath (copied from `src/res`) |
+| `Managers`    | The demo implementations of the engine managers                        |
+| `UIPositions` | Where each UI element goes on each scene (`Menu`, `Editing`, `Playing`, `Credits`) |
 
 ## Levels
 
