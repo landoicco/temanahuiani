@@ -10,7 +10,7 @@ public class Functions {
 
             for (int j = 0; j < newArray.length; j++) {
                 for (int i = 0; i < newArray[j].length; i++) {
-                    int index = j * ySize + i;
+                    int index = j * xSize + i;
                     newArray[j][i] = list.get(index);
                 }
             }
@@ -24,7 +24,7 @@ public class Functions {
 
             for (int j = 0; j < twoDimArray.length; j++) {
                 for (int i = 0; i < twoDimArray[j].length; i++) {
-                    int index = j * twoDimArray.length + i;
+                    int index = j * twoDimArray[0].length + i;
                     oneDimArray[index] = twoDimArray[j][i];
                 }
             }

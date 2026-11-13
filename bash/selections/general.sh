@@ -30,6 +30,11 @@ set_general_selection() {
     "lint")
         lint
         ;;
+    "test")
+        clean
+        build_and_pack
+        run_tests
+        ;;
     *)
         echo_text_bred "ERROR: Unknown selection."
         ;;
