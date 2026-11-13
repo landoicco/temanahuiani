@@ -1,0 +1,126 @@
+# Checks every PR and push to master. On a `v*` tag (or a manual run) it also
+# packages the game for Windows, macOS and Linux; tags publish a GitHub
+# Release with the packages. See docs/adr/0007-ci-and-releases-with-github-actions.md
+
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  APP_NAME: Temanahuiani
+  MAIN_MODULE: dev.licaza.temanahuiani.demo/dev.licaza.temanahuiani.demo.main.Game
+
+jobs:
+  # Lint, build and test with the same tools as `nix develop .#ci`
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: cachix/install-nix-action@v31
+
+      - name: Lint
+        working-directory: bash
+        run: nix develop ..#ci --command bash init.sh lint
+
+      # `test` does a clean build first, leaving the module jars in src/mods
+      - name: Build and test
+        working-directory: bash
+        run: nix develop ..#ci --command bash init.sh test
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mods
+          path: src/mods/*.jar
+          if-no-files-found: error
+
+  # jpackage can't cross-build, so each OS packages its own app image.
+  # The jars are the same for every OS; only the bundled Java runtime differs.
+  package:
+    needs: check
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            platform: linux
+          - os: windows-latest
+            platform: windows
+          - os: macos-latest
+            platform: macos
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      # Same major version as the flake's JDK
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: mods
+          path: mods
+
+      - name: Create app image
+        run: |
+          jpackage \
+            --type app-image \
+            --name "$APP_NAME" \
+            --module-path mods \
+            --module "$MAIN_MODULE" \
+            --dest dist
+
+      # Tag name for releases (v0.1.0), commit for manual runs
+      - name: Zip app image
+        id: zip
+        run: |
+          version="${GITHUB_REF_NAME}"
+          [[ "$GITHUB_REF" == refs/tags/v* ]] || version="${GITHUB_SHA::7}"
+          file="${APP_NAME}-${version}-${{ matrix.platform }}.zip"
+          cd dist
+          case "${{ matrix.platform }}" in
+            windows) 7z a "../$file" "$APP_NAME" ;;
+            # ditto keeps the .app bundle's symlinks and permissions
+            macos)   ditto -c -k --keepParent "$APP_NAME.app" "../$file" ;;
+            linux)   zip -r "../$file" "$APP_NAME" ;;
+          esac
+          echo "file=$file" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}
+          path: ${{ steps.zip.outputs.file }}
+          if-no-files-found: error
+
+  release:
+    needs: package
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      # Every artifact into one folder; only the zips get published
+      - uses: actions/download-artifact@v4
+        with:
+          path: packages
+          merge-multiple: true
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" packages/*.zip \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "$APP_NAME $GITHUB_REF_NAME" \
+            --generate-notes
