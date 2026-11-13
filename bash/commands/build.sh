@@ -1,7 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 source commands/java.sh
 
+# Module path directory, where every module jar goes
+create_mods_dir() {
+    mkdir -p src/mods
+}
 
 # # Composed commands
 

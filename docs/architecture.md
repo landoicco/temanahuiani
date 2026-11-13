@@ -24,7 +24,7 @@ parts.
 ## States and scenes
 
 `demo.main.GameStates` holds the current state (`MENU`, `PLAYING`, `EDIT`,
-`SETTINGS`, `GAME_OVER`) and switches the background music when it changes.
+`CREDITS`, `GAME_OVER`) and switches the background music when it changes.
 
 Each state has a scene in `demo.scenes`, all extending `GameScene` and
 implementing `SceneMethods`:
@@ -34,7 +34,7 @@ implementing `SceneMethods`:
 | `MENU`      | `Menu`     |
 | `PLAYING`   | `Playing`  |
 | `EDIT`      | `Editing`  |
-| `SETTINGS`  | `Credits`  |
+| `CREDITS`   | `Credits`  |
 | `GAME_OVER` | `GameOver` |
 
 Every frame, `demo.main.Game` (update) and `Render` (draw) switch on the

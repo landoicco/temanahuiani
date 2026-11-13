@@ -17,7 +17,7 @@ public class Render {
             case PLAYING:
                 game.getPlaying().render(g);
                 break;
-            case SETTINGS:
+            case CREDITS:
                 game.getCredits().render(g);
                 break;
             case EDIT:

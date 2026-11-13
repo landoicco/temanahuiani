@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ###################################################
 # Utility methods for showing a "menu" to the user
@@ -17,7 +17,7 @@ echo_text_bgreen \
 # Show quick menu
 show_quick_menu() {
     echo_text_bold "Quick options: "
-    echo_text_yellow "clean, build, play, bplay, install"
+    echo_text_yellow "clean, build, play, bplay, test"
     echo -n "For more options, type "
     echo_text_yellow "help"
     echo
@@ -52,10 +52,6 @@ show_long_menu() {
     # test
     echo -ne "\tBuild and run unit tests - "
     echo_text_yellow "test"
-
-    # install
-    echo -ne "\tCreate executable of this game - "
-    echo_text_yellow "install"
 
     # help
     echo -ne "\tList all available commands - "

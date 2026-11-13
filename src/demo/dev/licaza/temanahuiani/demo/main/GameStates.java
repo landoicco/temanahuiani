@@ -7,7 +7,7 @@ import javax.sound.sampled.Clip;
 public enum GameStates {
     PLAYING,
     MENU,
-    SETTINGS,
+    CREDITS,
     EDIT,
     GAME_OVER;
 

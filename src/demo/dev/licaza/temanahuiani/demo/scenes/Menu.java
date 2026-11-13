@@ -35,7 +35,7 @@ public class Menu extends GameScene implements SceneMethods {
 
     private static final Map<ColorPalette, Color> colorPalette = GetColorMap();
 
-    private TextButton bPlaying, bEdit, bSettings, bQuit;
+    private TextButton bPlaying, bEdit, bCredits, bQuit;
 
     public Menu(Game game) {
         super(game);
@@ -67,9 +67,9 @@ public class Menu extends GameScene implements SceneMethods {
             clickClip.start();
             GameStates.setGameState(GameStates.EDIT);
         }
-        if (bSettings.getBounds().contains(x, y)) {
+        if (bCredits.getBounds().contains(x, y)) {
             clickClip.start();
-            GameStates.setGameState(GameStates.SETTINGS);
+            GameStates.setGameState(GameStates.CREDITS);
         }
         if (bQuit.getBounds().contains(x, y)) {
             clickClip.start();
@@ -81,7 +81,7 @@ public class Menu extends GameScene implements SceneMethods {
     public void mouseMoved(int x, int y) {
         bPlaying.setMouseOver(false);
         bEdit.setMouseOver(false);
-        bSettings.setMouseOver(false);
+        bCredits.setMouseOver(false);
         bQuit.setMouseOver(false);
 
         if (bPlaying.getBounds().contains(x, y)) {
@@ -90,9 +90,9 @@ public class Menu extends GameScene implements SceneMethods {
         } else if (bEdit.getBounds().contains(x, y)) {
             hoverClip.start();
             bEdit.setMouseOver(true);
-        } else if (bSettings.getBounds().contains(x, y)) {
+        } else if (bCredits.getBounds().contains(x, y)) {
             hoverClip.start();
-            bSettings.setMouseOver(true);
+            bCredits.setMouseOver(true);
         } else if (bQuit.getBounds().contains(x, y)) {
             hoverClip.start();
             bQuit.setMouseOver(true);
@@ -110,8 +110,8 @@ public class Menu extends GameScene implements SceneMethods {
         if (bEdit.getBounds().contains(x, y)) {
             bEdit.setMousePressed(true);
         }
-        if (bSettings.getBounds().contains(x, y)) {
-            bSettings.setMousePressed(true);
+        if (bCredits.getBounds().contains(x, y)) {
+            bCredits.setMousePressed(true);
         }
         if (bQuit.getBounds().contains(x, y)) {
             bQuit.setMousePressed(true);
@@ -123,7 +123,7 @@ public class Menu extends GameScene implements SceneMethods {
         // Reset buttons
         bPlaying.resetBooleans();
         bEdit.resetBooleans();
-        bSettings.resetBooleans();
+        bCredits.resetBooleans();
         bQuit.resetBooleans();
 
         // Reset click audio clip
@@ -145,7 +145,7 @@ public class Menu extends GameScene implements SceneMethods {
         bEdit =
                 new TextButton(
                         "Edit", xPos, yPos + (height + padding), width, height, colorPalette);
-        bSettings =
+        bCredits =
                 new TextButton(
                         "Credits",
                         xPos,
@@ -164,7 +164,7 @@ public class Menu extends GameScene implements SceneMethods {
 
         bPlaying.draw(g);
         bEdit.draw(g);
-        bSettings.draw(g);
+        bCredits.draw(g);
         bQuit.draw(g);
     }
 

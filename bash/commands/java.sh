@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # # For design compliance, the full name of the module to be build
 # # needs to be defined on a variable

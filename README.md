@@ -47,31 +47,32 @@ To build it from source, run the commands from the `bash/` directory:
 
 ```shell
 cd bash/
-bash init.sh bplay
+./init.sh bplay
 ```
 
 This cleans previous builds, compiles the *engine* modules (commons, tools and
 core) and the *demo* module, packs them into jars and starts the game.
 
-Run `bash init.sh` with no arguments for an interactive wizard.
+Run `./init.sh` with no arguments for an interactive wizard.
 
-> 💡 Use `bash init.sh` instead of `./init.sh` or `sh init.sh`: the scripts rely
-> on bash features and `/bin/bash` doesn't exist on every system (e.g. NixOS).
+> 💡 The scripts need bash (not `sh`). They find it through `/usr/bin/env`, so
+> `./init.sh` works on any system with bash, NixOS included. `bash init.sh`
+> works too.
 
 ## 🛠️ Commands
 
 | Command                       | Description                                   |
 | ----------------------------- | --------------------------------------------- |
-| `bash init.sh bplay`          | Clean, build everything and play              |
-| `bash init.sh play`           | Play using the last build                     |
-| `bash init.sh clean`          | Remove all previous builds                    |
-| `bash init.sh deps`           | Fresh build, list modules and their deps      |
-| `bash init.sh format`         | Format all Java code (google-java-format, AOSP style) |
-| `bash init.sh lint`           | Fail if any Java file isn't formatted         |
-| `bash init.sh test`           | Clean, build everything and run the unit tests in `test/` |
-| `bash init.sh help`           | List the available commands                   |
-| `bash init.sh build <module>` | Build `all`, `engine`, `demo`, `commons`, `tools` or `core` |
-| `bash init.sh log <command>`  | Run `build`, `bplay` or `play` writing output to `logs/`; `clear` removes them |
+| `./init.sh bplay`             | Clean, build everything and play              |
+| `./init.sh play`              | Play using the last build                     |
+| `./init.sh clean`             | Remove all previous builds                    |
+| `./init.sh deps`              | Fresh build, list modules and their deps      |
+| `./init.sh format`            | Format all Java code (google-java-format, AOSP style) |
+| `./init.sh lint`              | Fail if any Java file isn't formatted         |
+| `./init.sh test`              | Clean, build everything and run the unit tests in `test/` |
+| `./init.sh help`              | List the available commands                   |
+| `./init.sh build <module>`    | Build `all`, `engine`, `demo`, `commons`, `tools` or `core` |
+| `./init.sh log <command>`     | Run `build`, `bplay` or `play` writing output to `logs/`; `clear` removes them |
 
 ## 🧩 Modules
 
@@ -103,7 +104,7 @@ commands worth reading.
 Want to be sure there are no external dependencies? Run:
 
 ```shell
-bash init.sh deps
+./init.sh deps
 ```
 
 ## 📚 Docs
