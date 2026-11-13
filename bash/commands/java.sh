@@ -25,7 +25,7 @@ build_demo() {
 
     # Safety clean...
     rm -rf src/demo/target
-    rm src/mods/${DEMO_MODULE}.jar
+    rm -f src/mods/${DEMO_MODULE}.jar
 
     javac \
         --module-path src/mods \
@@ -36,7 +36,8 @@ build_demo() {
         ${DEMO_PATH}/scenes/**.java \
         ${DEMO_PATH}/ui/**.java \
         ${DEMO_PATH}/inputs/**.java \
-        src/demo/module-info.java 
+        src/demo/module-info.java \
+        || return 1
 
     cp -r src/res/** src/demo/target/
 
@@ -51,7 +52,7 @@ build_engine_commons() {
 
     # Safety clean...
     rm -rf src/commons/target
-    rm src/mods/${COMMONS_MODULE}.jar
+    rm -f src/mods/${COMMONS_MODULE}.jar
 
     javac \
         --module-path src/mods \
@@ -61,7 +62,8 @@ build_engine_commons() {
         ${COMMONS_PATH}/actors/**.java \
         ${COMMONS_PATH}/api/**.java \
         ${COMMONS_PATH}/objects/**.java \
-        src/commons/module-info.java 
+        src/commons/module-info.java \
+        || return 1
 
     jar -cvf src/mods/${COMMONS_MODULE}.jar -C src/commons/target .
 }
@@ -71,7 +73,7 @@ build_engine_tools() {
 
     # Safety clean...
     rm -rf src/tools/target
-    rm src/mods/${TOOLS_MODULE}.jar
+    rm -f src/mods/${TOOLS_MODULE}.jar
 
     javac \
         --module-path src/mods \
@@ -79,7 +81,8 @@ build_engine_tools() {
         ${TOOLS_PATH}/math/**.java \
         ${TOOLS_PATH}/helpers/**.java \
         ${TOOLS_PATH}/gui/**.java \
-        src/tools/module-info.java 
+        src/tools/module-info.java \
+        || return 1
 
     jar -cvf src/mods/${TOOLS_MODULE}.jar -C src/tools/target .
 }
@@ -88,14 +91,15 @@ build_engine_core() {
 
     # Safety clean...
     rm -rf src/core/target
-    rm src/mods/${CORE_MODULE}.jar
+    rm -f src/mods/${CORE_MODULE}.jar
 
     javac \
         --module-path src/mods \
         -d src/core/target \
         ${CORE_PATH}/managers/**.java \
         ${CORE_PATH}/main/**.java \
-        src/core/module-info.java
+        src/core/module-info.java \
+        || return 1
 
     jar -cvf src/mods/${CORE_MODULE}.jar -C src/core/target .
 }
@@ -103,16 +107,16 @@ build_engine_core() {
 
 # # Method for properly list the involved java modules to be build
 
+# Each module needs the previous ones, so stop at the first that fails
 build_full_engine() {
-    build_engine_commons
-    build_engine_tools
-    build_engine_core
+    build_engine_commons &&
+        build_engine_tools &&
+        build_engine_core
 }
 
 build_all_java_modules() {
     # # Engine modules...
-    build_full_engine
-
-    # # Demo game module...
-    build_demo
+    build_full_engine &&
+        # # Demo game module...
+        build_demo
 }
