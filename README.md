@@ -9,11 +9,16 @@
 A tower defense engine and demo game written in plain Java: no frameworks,
 no build tools, no libraries.
 
+- **Temanahuiani** is the engine: the reusable `engine.*` modules and the
+  bash build.
+- **Age of Aliens** is the demo game built on it: the aliens have landed,
+  defend yourself. See the [game design](docs/game-design.md).
+
 ## 🪶 About the name
 
 **Temanahuiani** is a Nahuatl word meaning *defender* or *protector*: the one
 who defends others (*te-* "people", *manahuia* "to defend", *-ni* "one who
-does"). A fitting name for a tower defense game.
+does"). A fitting name for a tower defense engine.
 
 <!-- TODO: Add link to the dictionary entry -->
 
@@ -86,7 +91,7 @@ dev.licaza.temanahuiani.engine.tools      GUI widgets, resource loading, pathfin
         ▲
 dev.licaza.temanahuiani.engine.core       base game loop and managers
         ▲
-dev.licaza.temanahuiani.demo              the demo game: scenes, enemies, UI, assets
+dev.licaza.temanahuiani.demo              Age of Aliens, the demo game: scenes, enemies, UI, assets
 ```
 
 Each module only requires `java.desktop` from the JDK, plus the engine

@@ -41,6 +41,32 @@ parked until the new terrain atlas is sourced. To resume it:
 - Credit `favicon.png` in `src/res/LICENSES.txt`.
 - Clean up the code (the PR's "TODO: CLEAN CODE" commit).
 
+### Configurable grid and resolution scaling (engine)
+
+The demo moves to 64 px tiles on a 20×10 grid, drawn at a logical resolution
+of 1280×768 and scaled to the window (see `docs/game-design.md`). Today the
+code assumes 32 px tiles and a 20×20 grid in many places. In the engine:
+
+- Tile size and grid width/height become configuration, not constants.
+- The level file stores its width and height instead of assuming 400 tiles
+  (`LoadSave`, `Functions.Matrix` calls with `20, 20`).
+- `Game` draws to a fixed logical size and scales it to the window with
+  `Graphics2D.scale`; mouse coordinates are divided by the same scale.
+- Remove hardcoded pixel checks (e.g. `y < 640` in `Editing`, `* 32` in
+  scenes and managers).
+
+The demo then sets 64 px and 20×10, and its UI positions (`UIPositions`) are
+redone for a 1280 px wide screen. Best done together with resuming PR #7,
+which already reworks the tile system.
+
+### Ship the demo as Age of Aliens
+
+The release app and its zips are still named after the engine (`APP_NAME:
+Temanahuiani` in `.github/workflows/ci.yml`, e.g.
+`Temanahuiani-v0.1.0-windows-x64.zip`). Rename them to Age of Aliens, and use
+the title in the game window and the main menu. The repo and the modules keep
+the Temanahuiani name.
+
 ### Local package command
 
 A `./init.sh package` command running the same `jpackage` call as CI, to
@@ -69,4 +95,3 @@ right.
 ## 📝 Docs
 
 - Add the dictionary link for the name meaning in the README.
-- Add a game design document.

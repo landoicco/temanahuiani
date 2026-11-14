@@ -7,7 +7,7 @@
 | `dev.licaza.temanahuiani.engine.commons` | Shared types: `Enemy`, `Tower`, `Wave`, `Tile`, `Projectile`, `PathPoint`, the `SceneMethods` interface and constants |
 | `dev.licaza.temanahuiani.engine.tools`   | Helpers: GUI buttons, sprite/level loading (`LoadSave`), audio and font loading, image rotation, pathfinding |
 | `dev.licaza.temanahuiani.engine.core`    | The base `Game` window and loop, plus the managers           |
-| `dev.licaza.temanahuiani.demo`           | The demo game built on top of the engine                     |
+| `dev.licaza.temanahuiani.demo`           | Age of Aliens, the demo game built on top of the engine      |
 
 The engine modules know nothing about the demo. The demo extends engine
 classes (`Game` and the abstract managers) and fills in the game-specific
